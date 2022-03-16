@@ -1,0 +1,22 @@
+{
+  "name": "google-solution-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aziemp66/Google-Solution-Project.git"
+  },
+  "author": "Azie & Friends",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aziemp66/Google-Solution-Project/issues"
+  },
+  "homepage": "https://github.com/aziemp66/Google-Solution-Project#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
