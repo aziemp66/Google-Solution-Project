@@ -56,7 +56,9 @@ async function investorLogin(req, res) {
 		return res.status(400).json({ error: "Invalid password" });
 
 	//Creating and assigning token
-	const token = jwt.sign({ _id: investor._id }, process.env.TOKEN_SECRET);
+	const token = jwt.sign({ _id: investor._id }, process.env.TOKEN_SECRET, {
+		expiresIn: "1d",
+	});
 	res.header("x-auth-token", token).json({
 		message: "Logged in successfully",
 		token: token,
@@ -113,7 +115,9 @@ async function companyLogin(req, res) {
 		return res.status(400).json({ error: "Invalid password" });
 
 	//Creating and assigning token
-	const token = jwt.sign({ _id: company._id }, process.env.TOKEN_SECRET);
+	const token = jwt.sign({ _id: company._id }, process.env.TOKEN_SECRET, {
+		expiresIn: "1d",
+	});
 	res.header("x-auth-token", token).json({
 		message: "Logged in successfully",
 		token: token,
