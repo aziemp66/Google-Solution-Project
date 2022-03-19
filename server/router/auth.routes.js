@@ -4,4 +4,6 @@ const authController = require("../controller/auth.controller");
 
 router.post("/register/investor", authController.investorRegister);
 
+router.post("/login/investor", authController.investorLogin);
+
 module.exports = router;

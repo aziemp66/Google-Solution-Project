@@ -1,6 +1,8 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 const Investor = require("../model/investor.model");
 const validation = require("../util/validation");
-const bcrypt = require("bcryptjs");
 
 async function investorRegister(req, res) {
 	//Validating Data
@@ -34,6 +36,33 @@ async function investorRegister(req, res) {
 	}
 }
 
+async function investorLogin(req, res) {
+	//Validating Data
+	const { error } = validation.loginValidation(req.body);
+	if (error) return res.status(400).json({ error: error.details[0].message });
+
+	//Checking if user exists
+	const investor = await Investor.findOne({ email: req.body.email });
+	if (!investor)
+		return res.status(400).json({ error: "User does not exist" });
+
+	//Checking if password is correct
+	const validPassword = await bcrypt.compare(
+		req.body.password,
+		investor.password
+	);
+	if (!validPassword)
+		return res.status(400).json({ error: "Invalid password" });
+
+	//Creating and assigning token
+	const token = jwt.sign({ _id: investor._id }, process.env.TOKEN_SECRET);
+	res.header("x-auth-token", token).json({
+		message: "Logged in successfully",
+		token: token,
+	});
+}
+
 module.exports = {
 	investorRegister,
+	investorLogin,
 };
