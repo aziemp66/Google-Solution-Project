@@ -62,6 +62,7 @@ async function investorLogin(req, res) {
 	res.header("x-auth-token", token).json({
 		message: "Logged in successfully",
 		token: token,
+		id: investor._id,
 	});
 }
 
@@ -121,6 +122,7 @@ async function companyLogin(req, res) {
 	res.header("x-auth-token", token).json({
 		message: "Logged in successfully",
 		token: token,
+		id: company._id,
 	});
 }
 

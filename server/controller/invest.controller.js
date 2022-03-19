@@ -40,3 +40,7 @@ async function postInvest(req, res) {
 		});
 	}
 }
+
+module.exports = {
+	postInvest,
+};
