@@ -20,4 +20,14 @@ const loginValidation = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { registerValidation, loginValidation };
+const investValidation = (data) => {
+	const schema = Joi.object({
+		company: Joi.string().required(),
+		investor: Joi.string().required(),
+		amount: Joi.number().required(),
+	});
+
+	return schema.validate(data);
+};
+
+module.exports = { registerValidation, loginValidation, investValidation };
