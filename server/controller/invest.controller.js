@@ -4,7 +4,9 @@ const Investor = require("../model/investor.model");
 
 async function postInvest(req, res) {
 	const { companyId } = req.params;
-	const { investorId } = req.body;
+	const { _id: investorId, type } = req.user;
+
+	if (type !== "investor") res.status(403).json({ error: "Not an investor" });
 
 	try {
 		const company = await Company.findById(companyId);
