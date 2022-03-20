@@ -34,7 +34,7 @@ async function investorRegister(req, res) {
 		});
 	} catch (err) {
 		res.status(500).json({
-			message: err.message,
+			message: err,
 		});
 	}
 }
@@ -67,12 +67,16 @@ async function investorLogin(req, res) {
 		"investor"
 	);
 
-	const newRefreshToken = new RefreshToken({});
+	const newRefreshToken = new RefreshToken({
+		token: refreshToken,
+	});
+
+	await newRefreshToken.save();
 
 	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",
-		token: accessToken,
-		id: investor._id,
+		accessToken,
+		refreshToken,
 	});
 }
 
@@ -103,7 +107,7 @@ async function companyRegister(req, res) {
 		});
 	} catch (err) {
 		res.status(500).json({
-			message: err.message,
+			message: err,
 		});
 	}
 }
@@ -143,17 +147,47 @@ async function companyLogin(req, res) {
 
 	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",
-		Token: accessToken,
-		id: company._id,
+		accessToken,
+		refreshToken,
 	});
 }
 
-function refreshToken(req, res) {
+async function refreshToken(req, res) {
 	//take refresh token from the user
 	const refreshToken = req.body.token;
+	const refreshTokens = await RefreshToken.findOne({ token: refreshToken });
 
 	//send error if refresh token is not provided or invalid
 	if (!refreshToken) return res.status(401).json({ error: "No token" });
+	if (!refreshTokens) return res.status(401).json({ error: "Invalid token" });
+
+	//if refresh token is valid
+	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+		err && res.status(403).json({ error: err });
+
+		await RefreshToken.deleteOne({ token: refreshToken });
+
+		const newAccessToken = generateToken.generateAccessToken(
+			user._id,
+			user.type
+		);
+		const newRefreshToken = generateToken.generateRefreshToken(
+			user._id,
+			user.type
+		);
+
+		const newRefreshTokenObj = new RefreshToken({
+			token: newRefreshToken,
+		});
+
+		await newRefreshTokenObj.save();
+
+		res.status(200).json({
+			message: "Refresh token successfully",
+			AccessToken: newAccessToken,
+			refreshToken: newRefreshToken,
+		});
+	});
 }
 
 module.exports = {
