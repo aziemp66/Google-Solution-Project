@@ -12,4 +12,6 @@ router.post("/login/company", authController.companyLogin);
 
 router.post("/refresh", authController.refreshToken);
 
+router.post("/logout", authController.logout);
+
 module.exports = router;

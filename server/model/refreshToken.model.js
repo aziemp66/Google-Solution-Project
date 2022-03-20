@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 
 const tokenSchema = new mongoose.Schema({
 	token: {
-		type: Object,
+		type: String,
 		required: true,
 	},
-	date: {
+	createdAt: {
 		type: Date,
 		default: Date.now,
+		expires: "1h",
 	},
 });
 

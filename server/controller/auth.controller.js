@@ -191,10 +191,19 @@ async function refreshToken(req, res) {
 	});
 }
 
+async function logout(req, res) {
+	const refreshToken = req.body.token;
+	await RefreshToken.deleteOne({ token: refreshToken });
+	res.status(200).json({
+		message: "Logged out successfully",
+	});
+}
+
 module.exports = {
 	investorRegister,
 	investorLogin,
 	companyRegister,
 	companyLogin,
 	refreshToken,
+	logout,
 };
