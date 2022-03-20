@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const authRoutes = require("./router/auth.routes");
 const investRoutes = require("./router/invest.routes");
 
+const verifyToken = require("./middleware/verifyToken");
+
 const app = express();
 
 dotenv.config();
@@ -12,7 +14,7 @@ dotenv.config();
 app.use(express.json());
 
 app.use(authRoutes);
-app.use(investRoutes);
+app.use(verifyToken, investRoutes);
 
 let port = process.env.PORT || 5000;
 

@@ -1,9 +1,11 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 const Investor = require("../model/investor.model");
 const Company = require("../model/company.model");
+const RefreshToken = require("../model/refreshToken.model");
+
 const validation = require("../util/validation");
+const generateToken = require("../util/generateToken");
 
 async function investorRegister(req, res) {
 	//Validating Data
@@ -56,12 +58,20 @@ async function investorLogin(req, res) {
 		return res.status(400).json({ error: "Invalid password" });
 
 	//Creating and assigning token
-	const token = jwt.sign({ _id: investor._id }, process.env.TOKEN_SECRET, {
-		expiresIn: "1d",
-	});
-	res.header("x-auth-token", token).json({
+	const accessToken = generateToken.generateAccessToken(
+		investor._id,
+		"investor"
+	);
+	const refreshToken = generateToken.generateRefreshToken(
+		investor._id,
+		"investor"
+	);
+
+	const newRefreshToken = new RefreshToken({});
+
+	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",
-		token: token,
+		token: accessToken,
 		id: investor._id,
 	});
 }
@@ -116,14 +126,34 @@ async function companyLogin(req, res) {
 		return res.status(400).json({ error: "Invalid password" });
 
 	//Creating and assigning token
-	const token = jwt.sign({ _id: company._id }, process.env.TOKEN_SECRET, {
-		expiresIn: "1d",
+	const accessToken = generateToken.generateAccessToken(
+		company._id,
+		"company"
+	);
+	const refreshToken = generateToken.generateRefreshToken(
+		company._id,
+		"company"
+	);
+
+	const newRefreshToken = new RefreshToken({
+		token: refreshToken,
 	});
-	res.header("x-auth-token", token).json({
+
+	await newRefreshToken.save();
+
+	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",
-		token: token,
+		Token: accessToken,
 		id: company._id,
 	});
+}
+
+function refreshToken(req, res) {
+	//take refresh token from the user
+	const refreshToken = req.body.token;
+
+	//send error if refresh token is not provided or invalid
+	if (!refreshToken) return res.status(401).json({ error: "No token" });
 }
 
 module.exports = {
@@ -131,4 +161,5 @@ module.exports = {
 	investorLogin,
 	companyRegister,
 	companyLogin,
+	refreshToken,
 };

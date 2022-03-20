@@ -10,4 +10,6 @@ router.post("/register/company", authController.companyRegister);
 
 router.post("/login/company", authController.companyLogin);
 
+router.post("/refresh", authController.refreshToken);
+
 module.exports = router;
