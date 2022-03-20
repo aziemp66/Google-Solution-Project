@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const Investor = require("../model/investor.model");
 const Company = require("../model/company.model");
-const RefreshToken = require("../model/refreshToken.model");
+const RefreshToken = require("../model/token.model");
 
 const validation = require("../util/validation");
 const generateToken = require("../util/generateToken");
