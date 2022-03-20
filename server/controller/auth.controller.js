@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Investor = require("../model/investor.model");
 const Company = require("../model/company.model");
@@ -165,7 +166,7 @@ async function refreshToken(req, res) {
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 		err && res.status(403).json({ error: err });
 
-		await RefreshToken.deleteOne({ token: refreshToken });
+		RefreshToken.deleteOne({ token: refreshToken });
 
 		const newAccessToken = generateToken.generateAccessToken(
 			user._id,
@@ -180,7 +181,7 @@ async function refreshToken(req, res) {
 			token: newRefreshToken,
 		});
 
-		await newRefreshTokenObj.save();
+		newRefreshTokenObj.save();
 
 		res.status(200).json({
 			message: "Refresh token successfully",
