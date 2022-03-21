@@ -24,6 +24,16 @@ const investorSchema = new mongoose.Schema({
 		min: 6,
 		max: 255,
 	},
+	website: {
+		type: String,
+		required: false,
+		min: 6,
+		max: 255,
+	},
+	image: {
+		type: String,
+		required: false,
+	},
 	address: {
 		type: Object,
 		required: false,
