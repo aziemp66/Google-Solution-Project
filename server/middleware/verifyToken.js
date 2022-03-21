@@ -12,7 +12,7 @@ function auth(req, res, next) {
 
 	//Verify token
 	try {
-		const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+		const verified = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 		req.user = verified;
 		next();
 	} catch (error) {

@@ -11,7 +11,7 @@ async function postInvest(req, res) {
 
 	jwt.verify(
 		investorToken,
-		process.env.TOKEN_SECRET,
+		process.env.ACCESS_TOKEN_SECRET,
 		async (err, decoded) => {
 			if (err) return res.status(401).json({ error: err.message });
 
