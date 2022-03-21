@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const investController = require("../controller/invest.controller");
 
-router.post("/invest/:companyId", investController.postInvest);
+const verifyToken = require("../middleware/verifyToken");
+
+router.post("/invest/", verifyToken, investController.postInvest);
+
+router.get("/invest/", investController.getAllInvest);
 
 module.exports = router;

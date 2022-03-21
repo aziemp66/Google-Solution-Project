@@ -24,6 +24,14 @@ const companySchema = new mongoose.Schema({
 		min: 6,
 		max: 255,
 	},
+	address: {
+		type: Object,
+		required: false,
+	},
+	field: {
+		type: String,
+		required: false,
+	},
 	date: {
 		type: Date,
 		default: Date.now,

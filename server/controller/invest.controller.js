@@ -1,12 +1,27 @@
 const Invest = require("../model/invest.model");
 const Company = require("../model/company.model");
 const Investor = require("../model/investor.model");
+const jwt = require("jsonwebtoken");
 
 async function postInvest(req, res) {
-	const { companyId } = req.params;
-	const { _id: investorId, type } = req.user;
+	const { companyId } = req.body;
+	const investorToken = req.headers["auth-token"];
 
-	if (type !== "investor") res.status(403).json({ error: "Not an investor" });
+	let investorId;
+
+	jwt.verify(
+		investorToken,
+		process.env.TOKEN_SECRET,
+		async (err, decoded) => {
+			if (err) return res.status(401).json({ error: err.message });
+
+			investorId = decoded._id;
+
+			if (decoded.type !== "investor") {
+				res.status(403).json({ error: "Not an investor" });
+			}
+		}
+	);
 
 	try {
 		const company = await Company.findById(companyId);
@@ -42,7 +57,15 @@ async function postInvest(req, res) {
 		});
 	}
 }
+async function getAllInvest(req, res) {
+	const allInvest = await Invest.find()
+		.populate("company", "_id, name")
+		.populate("investor", "_id, name");
+
+	res.status(200).json(allInvest);
+}
 
 module.exports = {
 	postInvest,
+	getAllInvest,
 };
