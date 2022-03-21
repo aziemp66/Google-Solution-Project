@@ -12,13 +12,13 @@ async function postInvest(req, res) {
 	jwt.verify(
 		investorToken,
 		process.env.ACCESS_TOKEN_SECRET,
-		async (err, decoded) => {
+		(err, decoded) => {
 			if (err) return res.status(401).json({ error: err.message });
 
 			investorId = decoded._id;
 
 			if (decoded.type !== "investor") {
-				res.status(403).json({ error: "Not an investor" });
+				return res.status(403).json({ error: "Not an investor" });
 			}
 		}
 	);
@@ -47,18 +47,18 @@ async function postInvest(req, res) {
 
 		await invest.save();
 
-		res.status(201).json({
-			message: "Investment created",
-			invest,
-		});
+		res.status(201).json(invest);
 	} catch (err) {
-		res.status(500).json({
-			message: err.message,
-		});
+		res.status(500).json({ error: err.message });
 	}
 }
 async function getAllInvest(req, res) {
-	const allInvest = await Invest.find()
+	const allInvest = await Invest.find(
+		{},
+		{
+			__v: 0,
+		}
+	)
 		.populate("company", "_id, name")
 		.populate("investor", "_id, name");
 
