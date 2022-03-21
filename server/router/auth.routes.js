@@ -2,13 +2,13 @@ const router = require("express").Router();
 
 const authController = require("../controller/auth.controller");
 
-router.post("/register/investor", authController.investorRegister);
+router.post("/investor/register", authController.investorRegister);
 
-router.post("/login/investor", authController.investorLogin);
+router.post("/investor/login", authController.investorLogin);
 
-router.post("/register/company", authController.companyRegister);
+router.post("/company/register", authController.companyRegister);
 
-router.post("/login/company", authController.companyLogin);
+router.post("/company/login", authController.companyLogin);
 
 router.post("/refresh", authController.refreshToken);
 
