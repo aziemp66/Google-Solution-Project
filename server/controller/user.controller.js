@@ -2,9 +2,27 @@ const Investor = require("../model/investor.model");
 const Company = require("../model/company.model");
 
 async function getAllInvestor(req, res) {
-	const investors = await Investor.find();
+	const investors = await Investor.find(
+		{},
+		{
+			__v: 0,
+			password: 0,
+		}
+	);
 
 	res.status(200).json(investors);
+}
+
+async function getAllCompany(req, res) {
+	const companies = await Company.find(
+		{},
+		{
+			__v: 0,
+			password: 0,
+		}
+	);
+
+	res.status(200).json(companies);
 }
 
 async function getInvestorProfile(req, res) {
@@ -51,4 +69,5 @@ module.exports = {
 	getInvestorProfile,
 	getCompanyProfile,
 	getAllInvestor,
+	getAllCompany,
 };
