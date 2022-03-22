@@ -18,11 +18,11 @@ const investorSchema = new mongoose.Schema({
 		min: 6,
 		max: 1024,
 	},
-	country: {
+	bio: {
 		type: String,
 		required: false,
-		min: 6,
-		max: 255,
+		min: 20,
+		max: 3072,
 	},
 	website: {
 		type: String,
@@ -30,12 +30,8 @@ const investorSchema = new mongoose.Schema({
 		min: 6,
 		max: 255,
 	},
-	image: {
-		type: String,
-		required: false,
-	},
-	field: {
-		type: String,
+	address: {
+		type: Object,
 		required: false,
 	},
 	date: {
