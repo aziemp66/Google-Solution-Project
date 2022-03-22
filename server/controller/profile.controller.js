@@ -38,12 +38,51 @@ async function updateInvestorProfile(req, res) {
 		});
 	} catch (err) {
 		res.status(500).json({
-			message: err,
+			error: err,
 		});
 	}
 }
 
-async function updateBusinessProfile(req, res) {}
+async function updateBusinessProfile(req, res) {
+	//Validating Data
+	const { error } = validation.updateBusinessProfileValidation(req.body);
+	if (error) return res.status(400).json({ error: error.details[0].message });
+
+	//Checking if user exists
+	const business = await Business.findById(req.params.id);
+	if (!business) return res.status(400).json({ error: "Business not found" });
+
+	//Checking if user is Authorized
+	if (business._id.toString() !== req.user._id.toString())
+		return res.status(401).json({ error: "Unauthorized" });
+
+	//Checking null data validation
+	updateValidation.updateBusinessProfileValidation(req, business);
+
+	try {
+		await Business.findByIdAndUpdate(req.params.id, {
+			$set: {
+				name: req.body.name,
+				field: req.body.field,
+				address: {
+					country: req.body.address.country,
+					street: req.body.address.street,
+					city: req.body.address.city,
+					postalCode: req.body.address.postalCode,
+				},
+				bio: req.body.bio,
+				website: req.body.website,
+			},
+		});
+		res.status(200).json({
+			message: "Business profile updated successfully",
+		});
+	} catch (err) {
+		res.status(500).json({
+			error: err,
+		});
+	}
+}
 
 module.exports = {
 	updateInvestorProfile,
