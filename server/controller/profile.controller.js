@@ -48,19 +48,18 @@ async function updateBusinessProfile(req, res) {
 	const { error } = validation.updateBusinessProfileValidation(req.body);
 	if (error) return res.status(400).json({ error: error.details[0].message });
 
-	//Checking if user exists
-	const business = await Business.findById(req.params.id);
-	if (!business) return res.status(400).json({ error: "Business not found" });
-
 	//Checking if user is Authorized
-	if (business._id.toString() !== req.user._id.toString())
-		return res.status(401).json({ error: "Unauthorized" });
+	if (!req.user._id) return res.status(401).json({ error: "Unauthorized" });
+
+	//Checking if user exists
+	const business = await Business.findById(req.user._id.toString());
+	if (!business) return res.status(400).json({ error: "Business not found" });
 
 	//Checking null data validation
 	updateValidation.updateBusinessProfileValidation(req, business);
 
 	try {
-		await Business.findByIdAndUpdate(req.params.id, {
+		await Business.findByIdAndUpdate(req.user._id.toString(), {
 			$set: {
 				name: req.body.name,
 				field: req.body.field,

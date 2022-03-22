@@ -2,8 +2,8 @@ const router = require("express").Router();
 
 const profileController = require("../controller/profile.controller");
 
-router.patch("/investor/:id", profileController.updateInvestorProfile);
+router.patch("/investor/profile", profileController.updateInvestorProfile);
 
-router.patch("/business/:id", profileController.updateBusinessProfile);
+router.patch("/business/profile", profileController.updateBusinessProfile);
 
 module.exports = router;

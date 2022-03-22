@@ -1,27 +1,10 @@
 const Invest = require("../model/invest.model");
 const Business = require("../model/business.model");
 const Investor = require("../model/investor.model");
-const jwt = require("jsonwebtoken");
 
 async function postInvest(req, res) {
 	const { businessId } = req.body;
-	const investorToken = req.headers["auth-token"];
-
-	let investorId;
-
-	jwt.verify(
-		investorToken,
-		process.env.ACCESS_TOKEN_SECRET,
-		(err, decoded) => {
-			if (err) return res.status(401).json({ error: err.message });
-
-			investorId = decoded._id;
-
-			if (decoded.type !== "investor") {
-				return res.status(403).json({ error: "Not an investor" });
-			}
-		}
-	);
+	const investorId = req.user._id;
 
 	try {
 		const business = await Business.findById(businessId);
