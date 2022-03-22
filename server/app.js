@@ -7,8 +7,8 @@ const investRoutes = require("./router/invest.routes");
 const userRoutes = require("./router/user.routes");
 const profileRoutes = require("./router/profile.routes");
 
-const corsMiddleware = require("./middleware/cors");
-const verifyTokenMiddleware = require("./middleware/verifyToken");
+const corsMiddleware = require("./middlewares/cors");
+const verifyTokenMiddleware = require("./middlewares/verifyToken");
 
 const app = express();
 
