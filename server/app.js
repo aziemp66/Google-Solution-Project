@@ -12,9 +12,9 @@ const app = express();
 
 dotenv.config();
 
-app.use(express.json());
-
 app.use(corsMiddleware);
+
+app.use(express.json());
 
 app.use(authRoutes);
 app.use(investRoutes);

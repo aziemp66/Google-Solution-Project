@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 let mongodbUrl = "mongodb://localhost:27017/buddyvest";
 
 async function connectToDatabase() {
-	/* if (process.env.DB_CONNECT) {
+	if (process.env.DB_CONNECT) {
 		mongodbUrl = process.env.DB_CONNECT;
-	} */
+	}
 	mongoose.connect(
 		mongodbUrl,
 		{

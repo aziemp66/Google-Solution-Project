@@ -28,7 +28,6 @@ async function getAllCompany(req, res) {
 async function getInvestorProfile(req, res) {
 	const { id } = req.params;
 	const investor = await Investor.findById(id, {
-		_id: 0,
 		__v: 0,
 		password: 0,
 	});
@@ -39,16 +38,12 @@ async function getInvestorProfile(req, res) {
 		});
 	}
 
-	res.status(200).json({
-		message: "Investor profile",
-		investor,
-	});
+	res.status(200).json(investor);
 }
 
 async function getCompanyProfile(req, res) {
 	const { id } = req.params;
 	const company = await Company.findById(id, {
-		_id: 0,
 		__v: 0,
 		password: 0,
 	});
@@ -59,10 +54,7 @@ async function getCompanyProfile(req, res) {
 		});
 	}
 
-	res.status(200).json({
-		message: "Company profile",
-		company,
-	});
+	res.status(200).json(company);
 }
 
 module.exports = {
