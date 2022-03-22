@@ -34,10 +34,6 @@ const investorSchema = new mongoose.Schema({
 		type: String,
 		required: false,
 	},
-	address: {
-		type: Object,
-		required: false,
-	},
 	field: {
 		type: String,
 		required: false,

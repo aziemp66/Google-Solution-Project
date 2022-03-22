@@ -30,10 +30,6 @@ const companySchema = new mongoose.Schema({
 		min: 6,
 		max: 255,
 	},
-	image: {
-		type: String,
-		required: false,
-	},
 	address: {
 		type: Object,
 		required: false,

@@ -25,7 +25,7 @@ async function getAllCompany(req, res) {
 	res.status(200).json(companies);
 }
 
-async function getInvestorProfile(req, res) {
+async function getInvestorInfo(req, res) {
 	const { id } = req.params;
 	const investor = await Investor.findById(id, {
 		__v: 0,
@@ -41,7 +41,7 @@ async function getInvestorProfile(req, res) {
 	res.status(200).json(investor);
 }
 
-async function getCompanyProfile(req, res) {
+async function getCompanyInfo(req, res) {
 	const { id } = req.params;
 	const company = await Company.findById(id, {
 		__v: 0,
@@ -58,8 +58,8 @@ async function getCompanyProfile(req, res) {
 }
 
 module.exports = {
-	getInvestorProfile,
-	getCompanyProfile,
+	getInvestorInfo,
+	getCompanyInfo,
 	getAllInvestor,
 	getAllCompany,
 };
