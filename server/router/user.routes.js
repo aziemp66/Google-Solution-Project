@@ -6,8 +6,8 @@ router.get("/investor", userController.getAllInvestor);
 
 router.get("/investor/:id", userController.getInvestorInfo);
 
-router.get("/company", userController.getAllCompany);
+router.get("/business", userController.getAllBusiness);
 
-router.get("/company/:id", userController.getCompanyInfo);
+router.get("/business/:id", userController.getBusinessInfo);
 
 module.exports = router;

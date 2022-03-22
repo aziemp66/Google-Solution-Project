@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const investSchema = new mongoose.Schema({
-	company: {
+	business: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Company",
+		ref: "Business",
 		required: true,
 	},
 	investor: {

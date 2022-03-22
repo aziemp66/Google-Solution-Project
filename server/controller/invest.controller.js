@@ -1,10 +1,10 @@
 const Invest = require("../model/invest.model");
-const Company = require("../model/company.model");
+const Business = require("../model/business.model");
 const Investor = require("../model/investor.model");
 const jwt = require("jsonwebtoken");
 
 async function postInvest(req, res) {
-	const { companyId } = req.body;
+	const { businessId } = req.body;
 	const investorToken = req.headers["auth-token"];
 
 	let investorId;
@@ -24,12 +24,12 @@ async function postInvest(req, res) {
 	);
 
 	try {
-		const company = await Company.findById(companyId);
+		const business = await Business.findById(businessId);
 		const investor = await Investor.findById(investorId);
 
-		if (!company) {
+		if (!business) {
 			return res.status(404).json({
-				error: "Company not found",
+				error: "Business not found",
 			});
 		}
 
@@ -40,7 +40,7 @@ async function postInvest(req, res) {
 		}
 
 		const invest = new Invest({
-			company: companyId,
+			business: businessId,
 			investor: investorId,
 			amount: req.body.amount,
 		});
@@ -59,7 +59,7 @@ async function getAllInvest(req, res) {
 			__v: 0,
 		}
 	)
-		.populate("company", "_id, name")
+		.populate("business", "_id, name")
 		.populate("investor", "_id, name");
 
 	res.status(200).json(allInvest);
