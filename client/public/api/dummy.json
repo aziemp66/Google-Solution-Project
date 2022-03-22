@@ -16,5 +16,6 @@
         "icon": "../assets/icon/article.png",
         "title": "Article",
         "desc": "Provide information about investors from developed countries"  
-    }
+    },
+    {}
 ]
