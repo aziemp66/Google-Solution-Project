@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "icon": "../assets/icon/investor.png",
+        "title": "Investor",
+        "desc": "Provide information about investors from developed countries"
+    },
+    {
+        "id": 2,
+        "icon": "../assets/icon/investment.png",
+        "title": "Investment",
+        "desc": "Provide information about investors from developed countries"
+    },
+    {
+        "id": 3,
+        "icon": "../assets/icon/article.png",
+        "title": "Article",
+        "desc": "Provide information about investors from developed countries"  
+    }
+]
