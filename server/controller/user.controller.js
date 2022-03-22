@@ -1,5 +1,6 @@
 const Investor = require("../model/investor.model");
 const Business = require("../model/business.model");
+const Invest = require("../model/invest.model");
 
 async function getAllInvestor(req, res) {
 	const investors = await Investor.find(
@@ -9,6 +10,12 @@ async function getAllInvestor(req, res) {
 			password: 0,
 		}
 	);
+
+	let investorsArray = [];
+
+	investors.forEach((investor) => {
+		investorsArray.push(investor.toJSON());
+	});
 
 	res.status(200).json(investors);
 }
@@ -43,18 +50,18 @@ async function getInvestorInfo(req, res) {
 
 async function getBusinessInfo(req, res) {
 	const { id } = req.params;
-	const company = await Business.findById(id, {
+	const business = await Business.findById(id, {
 		__v: 0,
 		password: 0,
 	});
 
-	if (!company) {
+	if (!business) {
 		return res.status(404).json({
 			error: "Business not found",
 		});
 	}
 
-	res.status(200).json(company);
+	res.status(200).json(business);
 }
 
 module.exports = {
