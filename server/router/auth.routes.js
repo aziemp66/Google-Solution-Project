@@ -6,9 +6,9 @@ router.post("/investor/register", authController.investorRegister);
 
 router.post("/investor/login", authController.investorLogin);
 
-router.post("/company/register", authController.companyRegister);
+router.post("/business/register", authController.businessRegister);
 
-router.post("/company/login", authController.companyLogin);
+router.post("/business/login", authController.businessLogin);
 
 router.post("/refresh", authController.refreshToken);
 

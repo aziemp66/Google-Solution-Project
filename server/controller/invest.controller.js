@@ -1,10 +1,10 @@
 const Invest = require("../model/invest.model");
-const Company = require("../model/company.model");
+const Business = require("../model/business.model");
 const Investor = require("../model/investor.model");
 const jwt = require("jsonwebtoken");
 
 async function postInvest(req, res) {
-	const { companyId } = req.body;
+	const { businessId } = req.body;
 	const investorToken = req.headers["auth-token"];
 
 	let investorId;
@@ -12,24 +12,24 @@ async function postInvest(req, res) {
 	jwt.verify(
 		investorToken,
 		process.env.ACCESS_TOKEN_SECRET,
-		async (err, decoded) => {
+		(err, decoded) => {
 			if (err) return res.status(401).json({ error: err.message });
 
 			investorId = decoded._id;
 
 			if (decoded.type !== "investor") {
-				res.status(403).json({ error: "Not an investor" });
+				return res.status(403).json({ error: "Not an investor" });
 			}
 		}
 	);
 
 	try {
-		const company = await Company.findById(companyId);
+		const business = await Business.findById(businessId);
 		const investor = await Investor.findById(investorId);
 
-		if (!company) {
+		if (!business) {
 			return res.status(404).json({
-				error: "Company not found",
+				error: "Business not found",
 			});
 		}
 
@@ -40,26 +40,26 @@ async function postInvest(req, res) {
 		}
 
 		const invest = new Invest({
-			company: companyId,
+			business: businessId,
 			investor: investorId,
 			amount: req.body.amount,
 		});
 
 		await invest.save();
 
-		res.status(201).json({
-			message: "Investment created",
-			invest,
-		});
+		res.status(201).json(invest);
 	} catch (err) {
-		res.status(500).json({
-			message: err.message,
-		});
+		res.status(500).json({ error: err.message });
 	}
 }
 async function getAllInvest(req, res) {
-	const allInvest = await Invest.find()
-		.populate("company", "_id, name")
+	const allInvest = await Invest.find(
+		{},
+		{
+			__v: 0,
+		}
+	)
+		.populate("business", "_id, name")
 		.populate("investor", "_id, name");
 
 	res.status(200).json(allInvest);

@@ -32,4 +32,25 @@ const investValidation = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { registerValidation, loginValidation, investValidation };
+const updateInvestorProfileValidation = (data) => {
+	const schema = Joi.object({
+		name: Joi.string().min(6).max(255),
+		bio: Joi.string().min(20).max(3072),
+		website: Joi.string().min(6).max(255),
+
+		address: Joi.object({
+			street: Joi.string().min(6).max(255),
+			city: Joi.string().min(6).max(255),
+			postalCode: Joi.string().min(1),
+			country: Joi.string().min(6).max(255),
+		}),
+	});
+	return schema.validate(data);
+};
+
+module.exports = {
+	registerValidation,
+	loginValidation,
+	investValidation,
+	updateInvestorProfileValidation,
+};

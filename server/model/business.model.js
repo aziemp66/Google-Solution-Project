@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const companySchema = new mongoose.Schema({
+const businessSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
@@ -18,21 +18,17 @@ const companySchema = new mongoose.Schema({
 		min: 6,
 		max: 1024,
 	},
-	country: {
+	bio: {
 		type: String,
 		required: false,
-		min: 6,
-		max: 255,
+		min: 20,
+		max: 3072,
 	},
 	website: {
 		type: String,
 		required: false,
 		min: 6,
 		max: 255,
-	},
-	image: {
-		type: String,
-		required: false,
 	},
 	address: {
 		type: Object,
@@ -48,4 +44,4 @@ const companySchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model("Company", companySchema);
+module.exports = mongoose.model("Business", businessSchema);

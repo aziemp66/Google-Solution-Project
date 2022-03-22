@@ -4,10 +4,10 @@ const userController = require("../controller/user.controller");
 
 router.get("/investor", userController.getAllInvestor);
 
-router.get("/investor/:id", userController.getInvestorProfile);
+router.get("/investor/:id", userController.getInvestorInfo);
 
-router.get("/company", userController.getAllCompany);
+router.get("/business", userController.getAllBusiness);
 
-router.get("/company/:id", userController.getCompanyProfile);
+router.get("/business/:id", userController.getBusinessInfo);
 
 module.exports = router;

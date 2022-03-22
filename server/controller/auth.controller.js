@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const Investor = require("../model/investor.model");
-const Company = require("../model/company.model");
+const Business = require("../model/business.model");
 const RefreshToken = require("../model/token.model");
 
 const validation = require("../util/validation");
@@ -81,13 +81,13 @@ async function investorLogin(req, res) {
 	});
 }
 
-async function companyRegister(req, res) {
+async function businessRegister(req, res) {
 	//Validating Data
 	const { error } = validation.registerValidation(req.body);
 	if (error) return res.status(400).json({ error: error.details[0].message });
 
 	//Checking if user already exists
-	const userFound = await Company.findOne({ email: req.body.email });
+	const userFound = await Business.findOne({ email: req.body.email });
 	if (userFound)
 		return res.status(400).json({ error: "User already exists" });
 
@@ -96,15 +96,15 @@ async function companyRegister(req, res) {
 	const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
 	//Creating new user
-	const company = new Company({
+	const business = new Business({
 		name: req.body.name,
 		email: req.body.email,
 		password: hashedPassword,
 	});
 	try {
-		await company.save();
+		await business.save();
 		res.status(201).json({
-			message: "Company registered successfully",
+			message: "Business registered successfully",
 		});
 	} catch (err) {
 		res.status(500).json({
@@ -113,31 +113,32 @@ async function companyRegister(req, res) {
 	}
 }
 
-async function companyLogin(req, res) {
+async function businessLogin(req, res) {
 	//Validating Data
 	const { error } = validation.loginValidation(req.body);
 	if (error) return res.status(400).json({ error: error.details[0].message });
 
 	//Checking if user exists
-	const company = await Company.findOne({ email: req.body.email });
-	if (!company) return res.status(400).json({ error: "User does not exist" });
+	const business = await Business.findOne({ email: req.body.email });
+	if (!business)
+		return res.status(400).json({ error: "User does not exist" });
 
 	//Checking if password is correct
 	const validPassword = await bcrypt.compare(
 		req.body.password,
-		company.password
+		business.password
 	);
 	if (!validPassword)
 		return res.status(400).json({ error: "Invalid password" });
 
 	//Creating and assigning token
 	const accessToken = generateToken.generateAccessToken(
-		company._id,
-		"company"
+		business._id,
+		"business"
 	);
 	const refreshToken = generateToken.generateRefreshToken(
-		company._id,
-		"company"
+		business._id,
+		"business"
 	);
 
 	const newRefreshToken = new RefreshToken({
@@ -202,8 +203,8 @@ async function logout(req, res) {
 module.exports = {
 	investorRegister,
 	investorLogin,
-	companyRegister,
-	companyLogin,
+	businessRegister,
+	businessLogin,
 	refreshToken,
 	logout,
 };
