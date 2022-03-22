@@ -32,6 +32,7 @@ async function investorRegister(req, res) {
 		await investor.save();
 		res.status(201).json({
 			message: "Investor registered successfully",
+			investorId: investor._id,
 		});
 	} catch (err) {
 		res.status(500).json({
@@ -105,6 +106,7 @@ async function businessRegister(req, res) {
 		await business.save();
 		res.status(201).json({
 			message: "Business registered successfully",
+			businessId: business._id,
 		});
 	} catch (err) {
 		res.status(500).json({

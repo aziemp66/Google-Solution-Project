@@ -43,6 +43,7 @@ async function postInvest(req, res) {
 			business: businessId,
 			investor: investorId,
 			amount: req.body.amount,
+			field: business.field,
 		});
 
 		await invest.save();

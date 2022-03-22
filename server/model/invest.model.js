@@ -11,6 +11,10 @@ const investSchema = new mongoose.Schema({
 		ref: "Investor",
 		required: true,
 	},
+	field: {
+		type: String,
+		required: true,
+	},
 	amount: {
 		type: Number,
 		required: true,
