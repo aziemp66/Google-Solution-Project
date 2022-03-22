@@ -1,10 +1,12 @@
 import './index.css';
-import Search from "./Components/Search/Search" ;
+import InvestorPage from "./Components/Investor/InvestorPage";
+// import SearchPage from "./Components/Search/SearchPage" ;
 
 function App() {
   return (
     <div className="App">
-        <Search></Search>
+      {/* <SearchPage></SearchPage> */}
+      <InvestorPage></InvestorPage>
     </div>
   );
 }
