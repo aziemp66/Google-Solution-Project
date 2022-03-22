@@ -45,7 +45,9 @@ async function getInvestorInfo(req, res) {
 		});
 	}
 
-	res.status(200).json(investor);
+	res.status(200).json({
+		...investor.toJSON(),
+	});
 }
 
 async function getBusinessInfo(req, res) {
