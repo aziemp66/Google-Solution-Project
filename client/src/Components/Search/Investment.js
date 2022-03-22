@@ -45,13 +45,13 @@ function Investment() {
             </div>
             <div className="flex w-full pb-8">
                 <div className="flex flex-row items-center justify-center text-center 2xl:gap-8 mx-auto">
-                    <a className="font-bold text-base text-[#008C41]" href="#">1</a>
-                    <a className="font-bold text-base" href="#">2</a>
-                    <a className="font-bold text-base" href="#">3</a>
-                    <a className="font-bold text-base" href="#">4</a>
-                    <a className="font-bold text-base" href="#">5</a>
-                    <a className="font-medium text-base 2xl:text-base text-white border-solid rounded-2xl border-[1px] 2xl:w-[6rem] px-4 py-1 bg-[#008C41]"
-                        href="#">Next</a>
+                    <button className="font-bold text-base text-[#008C41]" href="#">1</button>
+                    <button className="font-bold text-base" href="#">2</button>
+                    <button className="font-bold text-base" href="#">3</button>
+                    <button className="font-bold text-base" href="#">4</button>
+                    <button className="font-bold text-base" href="#">5</button>
+                    <button className="font-medium text-base 2xl:text-base text-white border-solid rounded-2xl border-[1px] 2xl:w-[6rem] px-4 py-1 bg-[#008C41]"
+                        href="#">Next</button>
                 </div>
             </div>
         </div>

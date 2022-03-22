@@ -6,7 +6,7 @@ function Search() {
     return (
         <section className="inline-block w-full 2xl:w-full align-middle bg-[#E6EDE9]">
             <div className="flex flex-col w-full 2xl:w-full gap-4 ">
-                <div className="flex justify-center items-center w-full w-full 2xl:w-full mb-12 2xl:mb-12 bg-white">
+                <div className="flex justify-center items-center w-full 2xl:w-full mb-12 2xl:mb-12 bg-white">
                     <div class="my-6 w-[50%] 2xl:w-[35%]">
                         <form class="input-group relative flex flex-row w-full items-center ">
                             <input type="search"
