@@ -4,7 +4,7 @@ function Investment() {
             <div className="inline-block px-12">
                 <h2 className="text-[#008C41] font-semibold text-xl 2xl:text-2xl text-left" >INVESTMENT</h2>
             </div>
-            <div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
+            <div className="Investment-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
                 <div className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6">
                     <div className="inline-block 2xl:pl-16">
                         <img src="/searchAsset/companyProfile.png" alt="CompanyProfile" srcset="" />
