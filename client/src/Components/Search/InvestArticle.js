@@ -1,7 +1,12 @@
+import Investor from "./Investor";
+import Investment from "./Investment";
+
 function InvestArticle() { 
     return (
-        <div>
-            <h1>Investment</h1>
+        <div className="flex flex-col items-start justify-start 2xl:w-[70%]">
+            <Investor />
+            <Investment />
+            <h1>Article</h1>
         </div>
     );
 }

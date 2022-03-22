@@ -18,7 +18,7 @@ function Search() {
                         </form>
                     </div>
                 </div>
-                <div className="flex flex-row w-[90%] 2xl:w-[90%] mx-auto items-center justify-center gap-4">
+                <div className="flex flex-row w-[90%] 2xl:w-[80%] mx-auto justify-center gap-4">
                     <Sort></Sort>
                     <InvestArticle></InvestArticle>
                 </div>
