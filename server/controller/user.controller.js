@@ -11,7 +11,40 @@ async function getAllInvestor(req, res) {
 		}
 	);
 
-	investors.forEach((investor) => {});
+	investors.forEach(async (investor) => {
+		//Counting the most invested business field
+		const invest = await Invest.find({ investor: investor._id });
+
+		let field = {};
+
+		invest.forEach((investment) => {
+			if (field[investment.field]) {
+				field[investment.field] += investment.amount;
+			} else {
+				field[investment.field] = investment.amount;
+			}
+		});
+
+		let max = 0;
+		let fieldName = "";
+
+		for (let key in field) {
+			if (field[key] > max) {
+				max = field[key];
+				fieldName = key;
+			}
+		}
+
+		Investor.findByIdAndUpdate(
+			investor._id,
+			{
+				$set: {
+					mostInvestedField: fieldName,
+				},
+			},
+			{ new: true }
+		);
+	});
 
 	res.status(200).json(investors);
 }
