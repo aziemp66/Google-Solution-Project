@@ -1,6 +1,7 @@
 const Investor = require("../model/investor.model");
 const Business = require("../model/business.model");
 const validation = require("../util/validation");
+const updateValidation = require("../util/updateValidation");
 
 async function updateInvestorProfile(req, res) {
 	//Validating Data
@@ -11,21 +12,12 @@ async function updateInvestorProfile(req, res) {
 	const investor = await Investor.findById(req.params.id);
 	if (!investor) return res.status(400).json({ error: "Investor not found" });
 
-	if (!req.body.name) req.body.name = investor.name;
-	if (!req.body.bio) req.body.bio = investor.bio;
-	if (!req.body.website) req.body.website = investor.website;
-	if (!req.body.address) req.body.address = {};
-	if (!req.body.address.country)
-		req.body.address.country = investor.address.country;
-	if (!req.body.address.city) req.body.address.city = investor.address.city;
-	if (!req.body.address.street)
-		req.body.address.street = investor.address.street;
-	if (!req.body.address.postalCode)
-		req.body.address.postalCode = investor.address.postalCode;
-
 	//Checking if user is Authorized
 	if (investor._id.toString() !== req.user._id.toString())
 		return res.status(401).json({ error: "Unauthorized" });
+
+	//Checking null data validation
+	updateValidation.updateInvestorProfileValidation(req, investor);
 
 	try {
 		await Investor.findByIdAndUpdate(req.params.id, {
