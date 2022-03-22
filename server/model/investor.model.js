@@ -30,6 +30,10 @@ const investorSchema = new mongoose.Schema({
 		min: 6,
 		max: 255,
 	},
+	mostInvestedField: {
+		type: String,
+		required: false,
+	},
 	address: {
 		type: Object,
 		required: false,

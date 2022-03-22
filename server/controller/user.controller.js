@@ -11,11 +11,7 @@ async function getAllInvestor(req, res) {
 		}
 	);
 
-	let investorsArray = [];
-
-	investors.forEach((investor) => {
-		investorsArray.push(investor.toJSON());
-	});
+	investors.forEach((investor) => {});
 
 	res.status(200).json(investors);
 }
@@ -34,7 +30,7 @@ async function getAllBusiness(req, res) {
 
 async function getInvestorInfo(req, res) {
 	const { id } = req.params;
-	const investor = await Investor.findById(id, {
+	let investor = await Investor.findById(id, {
 		__v: 0,
 		password: 0,
 	});
@@ -45,9 +41,40 @@ async function getInvestorInfo(req, res) {
 		});
 	}
 
-	res.status(200).json({
-		...investor.toJSON(),
+	//Counting the most invested business field
+	const invest = await Invest.find({ investor: id });
+
+	let field = {};
+
+	invest.forEach((investment) => {
+		if (field[investment.field]) {
+			field[investment.field] += investment.amount;
+		} else {
+			field[investment.field] = investment.amount;
+		}
 	});
+
+	let max = 0;
+	let fieldName = "";
+
+	for (let key in field) {
+		if (field[key] > max) {
+			max = field[key];
+			fieldName = key;
+		}
+	}
+
+	investor = await Investor.findByIdAndUpdate(
+		id,
+		{
+			$set: {
+				mostInvestedField: fieldName,
+			},
+		},
+		{ new: true }
+	);
+
+	res.status(200).json(investor);
 }
 
 async function getBusinessInfo(req, res) {
