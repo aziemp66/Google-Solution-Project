@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
  BrowserRouter,
@@ -7,6 +8,7 @@ import {
 import NavBar from './components/Navbar';
 import Home from './screens/Home';
 import Search from "./components/Search/Search" ;
+
 
 const App = () => {
   return (
