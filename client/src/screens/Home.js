@@ -1,12 +1,14 @@
 import React from "react";
-import Section from "../components/Section";
-import Menu from "../components/Product/Product";
+import Section from "../components/Section/Section";
+import Card from "../components/Card/Card";
+import Article from "../components/Article/Article";
 
 const Home = () => {
     return (
         <main className="w-full bg-[#E6EDE9]">
             <Section/>
-            <Menu/>
+            <Card/>
+            <Article/>
         </main>
     );
 }
