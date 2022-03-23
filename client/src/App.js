@@ -1,11 +1,10 @@
-
 import React from 'react';
 import {
  BrowserRouter,
  Route,
  Switch 
 } from 'react-router-dom';
-import NavBar from './components/Navbar';
+import NavBar from './components/Navbar/Navbar';
 import Home from './screens/Home';
 import Search from "./components/Search/Search" ;
 
