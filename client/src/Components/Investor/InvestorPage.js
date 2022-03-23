@@ -1,4 +1,5 @@
 import SortInvestor from "./SortInvestor";
+import ListInvestor from "./ListInvestor";
 
 function InvestorPage() { 
     return (
@@ -18,6 +19,7 @@ function InvestorPage() {
                 </div>
                 <div className="flex flex-row w-[90%] 2xl:w-[80%] mx-auto gap-4">
                     <SortInvestor></SortInvestor>
+                    <ListInvestor></ListInvestor>
                 </div>
             </div>
         </section>
