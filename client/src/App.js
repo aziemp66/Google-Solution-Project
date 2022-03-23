@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import NavBar from './components/Navbar/Navbar';
 import Home from './screens/Home';
-import Search from "./components/Search/Search" ;
+import Search from "./components/Search/SearchPage" ;
 
 
 const App = () => {
