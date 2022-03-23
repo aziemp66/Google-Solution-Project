@@ -15,7 +15,7 @@ const Card = (props) => {
     const [data] = useFetch('dummy');
     
     return (
-   <section className="max-w-screen-xl px-6 py-6 pb-24 mx-auto">
+   <section className="max-w-screen-lg px-6 py-6 pb-24 mx-auto">
           <Title title="Product" />
                 {data.map(dummy => (
                     <button className="max-w-screen-xl py-8 pt-20 pb-24 pl-10 mx-auto px-13 w-80 h-60" key={dummy.id}>
