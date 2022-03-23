@@ -20,7 +20,7 @@ const Card = (props) => {
                 {data.map(dummy => (
                     <button className="max-w-screen-xl py-8 pt-20 pb-24 pl-10 mx-auto px-13 w-80 h-60" key={dummy.id}>
                          <Fade top>
-                            {/* <Menu {...dummy}/> */}
+                            <Menu {...dummy}/>
                          </Fade>
                     </button>
                 ))}
