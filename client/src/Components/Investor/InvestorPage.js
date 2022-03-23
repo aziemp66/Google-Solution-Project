@@ -1,4 +1,5 @@
 import SortInvestor from "./SortInvestor";
+
 function InvestorPage() { 
     return (
         <section className="inline-block w-full 2xl:w-full pb-12 2xl:h-auto align-middle bg-[#E6EDE9]">
@@ -17,7 +18,6 @@ function InvestorPage() {
                 </div>
                 <div className="flex flex-row w-[90%] 2xl:w-[80%] mx-auto gap-4">
                     <SortInvestor></SortInvestor>
-                    
                 </div>
             </div>
         </section>
