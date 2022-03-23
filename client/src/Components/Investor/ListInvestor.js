@@ -1,6 +1,6 @@
 function ListInvestor() {
     return (
-        <div className="flex flex-col 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-12 mx-auto bg-white">
+        <div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-12 mx-auto bg-white">
             <div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
                 <div className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6">
                     <div className="inline-block 2xl:pl-16">
