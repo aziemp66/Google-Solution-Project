@@ -1,10 +1,9 @@
-import "./Search.css";
 import InvestArticle from "./InvestArticle";
 import Sort from "./Sort";
 
 function Search() {
     return (
-        <section className="inline-block w-full 2xl:w-full align-middle bg-[#E6EDE9]">
+        <section className="inline-block w-full 2xl:w-full align-middle bg-[#E6EDE9] 2xl:mt-28">
             <div className="flex flex-col w-full 2xl:w-full gap-4 ">
                 <div className="flex justify-center items-center w-full 2xl:w-full mb-12 2xl:mb-12 bg-white">
                     <div class="my-6 w-[50%] 2xl:w-[35%]">

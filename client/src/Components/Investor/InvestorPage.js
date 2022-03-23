@@ -3,9 +3,9 @@ import ListInvestor from "./ListInvestor";
 
 function InvestorPage() { 
     return (
-        <section className="inline-block w-full 2xl:w-full pb-12 2xl:h-auto align-middle bg-[#E6EDE9]">
+        <section className="inline-block pb-12 2xl:pb-12 w-full 2xl:w-full 2xl:h-auto align-middle bg-[#E6EDE9]">
             <div className="flex flex-col w-full 2xl:w-full gap-4 ">
-                <div className="flex justify-center items-center w-full 2xl:w-full mt-12 mb-12 2xl:mb-12">
+                <div className="flex justify-center items-center w-full 2xl:w-full mt-40 mb-6">
                     <div className="flex flex-col align-center items-center text-center gap-3" >
                         <img src="/investorAsset/deal.png" alt="dealIcon" />
                         <h1 className="font-bold text-black text-xl 2xl:text-3xl" >INVESTOR</h1>
