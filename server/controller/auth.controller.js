@@ -69,11 +69,25 @@ async function investorLogin(req, res) {
 		"investor"
 	);
 
-	const newRefreshToken = new RefreshToken({
-		token: refreshToken,
+	//checking if investor has a refresh token
+	const existingToken = await RefreshToken.findOne({
+		userId: investor._id,
 	});
 
-	await newRefreshToken.save();
+	if (existingToken) {
+		//if investor has a refresh token, update it
+		await RefreshToken.updateOne(
+			{ userId: investor._id },
+			{ token: refreshToken }
+		);
+	} else {
+		const newRefreshToken = new RefreshToken({
+			token: refreshToken,
+			userId: investor._id,
+		});
+
+		await newRefreshToken.save();
+	}
 
 	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",
@@ -143,11 +157,25 @@ async function businessLogin(req, res) {
 		"business"
 	);
 
-	const newRefreshToken = new RefreshToken({
-		token: refreshToken,
+	//checking if business has a refresh token
+	const existingToken = await RefreshToken.findOne({
+		userId: business._id,
 	});
 
-	await newRefreshToken.save();
+	if (existingToken) {
+		//if business has a refresh token, update it
+		await RefreshToken.updateOne(
+			{ userId: business._id },
+			{ token: refreshToken }
+		);
+	} else {
+		const newRefreshToken = new RefreshToken({
+			token: refreshToken,
+			userId: business._id,
+		});
+
+		await newRefreshToken.save();
+	}
 
 	res.header("auth-token", accessToken).json({
 		message: "Logged in successfully",

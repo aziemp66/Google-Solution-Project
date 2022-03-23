@@ -5,10 +5,13 @@ const tokenSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	createdAt: {
+	userId: {
+		type: String,
+		required: true,
+	},
+	date: {
 		type: Date,
 		default: Date.now,
-		expires: "1h",
 	},
 });
 
