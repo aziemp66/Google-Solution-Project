@@ -6,16 +6,16 @@ import {
 } from 'react-router-dom';
 import NavBar from './components/Navbar';
 import Home from './screens/Home';
-import Search from "./Components/Search/Search" ;
+import Search from "./components/Search/Search" ;
 
 const App = () => {
   return (
     <BrowserRouter>
       <NavBar/>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/seach" component={Search} />
-      </Switch>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/search" component={Search} />
+        </Switch>
     </BrowserRouter>
   )
 }
