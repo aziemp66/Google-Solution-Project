@@ -44,7 +44,7 @@ const Navbar = (props) => {
             <nav className="flex max-w-screen-xl px-6 py-3 mx-28">    
                 <Fade top>
                     <div className="container hidden space-x-3 mx-18 md:flex lg:flex">
-                        <ul className="flex items-center m-5 space-x-3 text-xl font-bold">
+                        <ul className="flex items-center m-5 space-x-8 text-xl font-bold">
                             {data.map(item => (
                                 <li key={item.id}>
                                         <button className="font-bold text-black poppins" activeClassName="text-gray-400 border b-4 border-blue-600 text-blue-700" onClick={() => history.push(`${item.to}`)}>
