@@ -1,4 +1,5 @@
 import Details from "./Details";
+import About from "./About";
 
 function ProfileInvestor() {
     return (
@@ -10,6 +11,7 @@ function ProfileInvestor() {
             </div>
             <div className="flex flex-row w-full items-start gap-4">
                 <Details></Details>
+                <About></About>
             </div>
         </section>
     );
