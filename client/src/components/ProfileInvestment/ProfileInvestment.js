@@ -13,3 +13,5 @@ function ProfileInvestment(){
         </section>
     );
 }
+
+export default ProfileInvestment;;
