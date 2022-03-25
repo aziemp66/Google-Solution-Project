@@ -1,10 +1,15 @@
 import "./App.css";
 import axios from "axios";
 import { useState } from "react";
+import InvestorDetail from "./components/InvestorDetail";
 
 function App() {
-	const [investor, setInvestors] = useState(null);
+	const [investors, setInvestors] = useState(null);
 	const getInvestors = async () => {
+		if (investors) {
+			setInvestors(null);
+			return;
+		}
 		//get joke form offcial-joke-api
 		const response = await axios.get("http://localhost:5000/investor/");
 		setInvestors(response.data);
@@ -12,16 +17,7 @@ function App() {
 	return (
 		<div>
 			<button onClick={getInvestors}>Get All Investors</button>
-			{investor && (
-				<ul>
-					{investor.map((investor) => (
-						<li key={investor._id}>
-							<p>{investor.name}</p>
-							<p>{investor.email}</p>
-						</li>
-					))}
-				</ul>
-			)}
+			{investors && <InvestorDetail investors={investors} />}
 		</div>
 	);
 }
