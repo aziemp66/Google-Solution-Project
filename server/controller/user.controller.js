@@ -63,7 +63,7 @@ async function getAllBusiness(req, res) {
 
 async function getInvestorInfo(req, res) {
 	const { id } = req.params;
-	let investor = await Investor.findById(id, {
+	const investor = await Investor.findById(id, {
 		__v: 0,
 		password: 0,
 	});
@@ -97,7 +97,7 @@ async function getInvestorInfo(req, res) {
 		}
 	}
 
-	investor = await Investor.findByIdAndUpdate(
+	await Investor.findByIdAndUpdate(
 		id,
 		{
 			$set: {
