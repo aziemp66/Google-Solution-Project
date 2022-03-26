@@ -12,7 +12,7 @@ function Details() {
                     <img src="/assets/companyProfile.png" alt="companyProfile" srcset="" />
                 </div>
             </div>
-            <div className="flex flex-col justify-center gap-5 px-16 py-16 bg-white ">
+            <div className="flex flex-col justify-center gap-8 px-16 pt-16 pb-8 bg-white ">
                 <div className="text-center">
                     <h3 className="font-semibold text-lg 2xl:text-xl">TODAY COMPANY</h3>
                     <p className="font-normal text-lg 2xl:text-lg text-gray-500">Wina, Austria</p>
@@ -21,6 +21,9 @@ function Details() {
                     <p className="font-normal text-sm 2xl:text-base">Jl. Srijaya Negara, No. 123, Wina, Austria.</p>
                     <p className="font-normal text-sm 2xl:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <p className="font-normal text-sm 2xl:text-base">Postal Code <span>12345</span></p>
+                </div>
+                <div className="mx-auto">
+                    <button type="button" className="border-[1px] border-solid rounded-full px-8 py-2 bg-[#008C41] text-white font-semibold">Give Funds</button>
                 </div>
             </div>
         </div>
