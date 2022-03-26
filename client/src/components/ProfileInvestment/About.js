@@ -30,13 +30,13 @@ function About() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-start w-full pt-8 px-10 bg-white ">
+                <div className="flex flex-col items-start w-full pt-14 px-10 bg-white ">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-row items-center justify-start">
                             <h3 className="font-bold text-lg 2xl:text-xl">MOST INVESTED FIELDS BY THIS COMPANY</h3>
                         </div>
                         <div className="flex flex-col pl-6 w-full gap-8">
-                            <div className="flex flex-row items-center gap-4">
+                            <div className="flex flex-row items-end gap-4">
                                 <div>
                                     <img src="./assets/icon/home.png" alt="" />
                                 </div>
@@ -49,7 +49,7 @@ function About() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-start w-full pt-8 pb-[2.75rem] px-10 bg-white ">
+                <div className="flex flex-col items-start w-full pt-8 pb-[4.54em] px-10 bg-white ">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-row items-center justify-start">
                             <h3 className="font-bold text-lg 2xl:text-xl">CONTACT</h3>
