@@ -28,6 +28,8 @@ async function getAllInvestor(req, res) {
 		let max = 0;
 		let fieldName = "";
 
+		//check for the numbers of business invested
+
 		for (let key in field) {
 			if (field[key] > max) {
 				max = field[key];
