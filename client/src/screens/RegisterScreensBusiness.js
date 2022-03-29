@@ -48,7 +48,7 @@ const RegisterScreensBusiness = (props) => {
             <img width="200" src="../../../assets/buddyVest.png" alt="logo" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 poppins">
-            Register in Investor{" "}
+            Register in Business{" "}
           </h2>
           <div className="mt-8">
             <div className="mt-6">
