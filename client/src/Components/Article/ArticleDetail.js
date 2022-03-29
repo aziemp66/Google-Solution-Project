@@ -20,7 +20,7 @@ const ArticleDetail = ({ match }) => {
   if (!article)
     return (
       <h1 className="sm:text-4xl text-2xl font-bold mt-6 text-gray-900">
-        Article not exists
+        Article not found
       </h1>
     );
   const OtherArticles = articlesContent.filter(
