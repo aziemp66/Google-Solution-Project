@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import NavBar from "./components/Navbar/Navbar";
-import Home from "./screens/Home";
+import Home from "./screens/HomeScreens";
 import Search from "./components/Search/SearchPage";
 import InvestorPage from "./components/Investor/InvestorPage";
 import ProfileInvestor from "./components/ProfileInvestor/ProfileInvestor";
