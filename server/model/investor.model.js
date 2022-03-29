@@ -38,10 +38,6 @@ const investorSchema = new mongoose.Schema({
 		type: Object,
 		required: false,
 	},
-	investedBusinessAmount: {
-		type: Number,
-		required: false,
-	},
 	date: {
 		type: Date,
 		default: Date.now,

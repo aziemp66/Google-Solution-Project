@@ -30,12 +30,6 @@ async function getAllInvestor(req, res) {
 
 		//check for the numbers of business invested
 
-		let investedBusinessAmount = 0;
-
-		invest.forEach((investment) => {
-			investedBusinessAmount++;
-		});
-
 		for (let key in field) {
 			if (field[key] > max) {
 				max = field[key];
@@ -48,7 +42,6 @@ async function getAllInvestor(req, res) {
 			{
 				$set: {
 					mostInvestedField: fieldName,
-					investedBusinessAmount: investedBusinessAmount,
 				},
 			},
 			{ new: true }
