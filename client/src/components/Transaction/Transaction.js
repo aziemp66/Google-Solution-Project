@@ -23,7 +23,7 @@ function Transaction() {
                     </div>
                     <div className="flex w-full flex-col items-start gap-4">
                         <h3 className="font-bold text-lg 2xl:text-xl">INVESTMENT AMOUNT<span className="text-red-500">*</span></h3>
-                        <input type="text" class="w-[30%] px-6 py-2 text-sm font-normal text-gray-900 bg-white bg-clip-padding border border-solid border-gray-500 rounded-lg transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-gray-400 focus:outline-none"/>
+                        <input type="text" class="w-[30%] px-4 py-2 text-sm font-normal text-gray-900 bg-white bg-clip-padding border border-solid border-gray-500 rounded-lg transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-gray-400 focus:outline-none"/>
                     </div>
                     <div className="flex w-[100%] pt-6 flex-row gap-12 item-center justify-center">
                         <button type="button" className="border-[1px] border-solid rounded-full px-12 py-2 bg-[#008C41] text-white font-semibold">Invest Now</button>

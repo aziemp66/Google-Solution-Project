@@ -7,6 +7,8 @@ import InvestorPage from "./components/Investor/InvestorPage";
 import ProfileInvestor from "./components/ProfileInvestor/ProfileInvestor";
 import ProfileInvestment from "./components/ProfileInvestment/ProfileInvestment";
 import Transaction from "./components/Transaction/Transaction";
+import InvestSuccess from "./components/Transaction/InvestSuccess";
+
 
 const App = () => {
 	return (
@@ -27,6 +29,7 @@ const App = () => {
 				/>
 				<Route exact path="/investor" component={InvestorPage} />
 				<Route exact path="/transaction" component={Transaction} />
+				<Route exact path="/investsuccess" component={InvestSuccess} />
 			</Switch>
 		</BrowserRouter>
 	);
