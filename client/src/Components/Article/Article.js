@@ -5,6 +5,7 @@ const Article = ({ articles }) => {
   // const history = useHistory();
 
   return (
+    <>
       {articles.map((article, index) => (
         <div key={index} className="p-4 md:w-1/4 mt-10">
           <div className="h-full border-2 border-gray-200 border-opacity-80 rounded-2xl  overflow-hidden shadow-lg hover:bg-grey-100  hover:animate-pulse">
@@ -31,6 +32,7 @@ const Article = ({ articles }) => {
           </div>
         </div>
       ))}
+    </>
   );
 };
 
