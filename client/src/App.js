@@ -7,6 +7,7 @@ import InvestorPage from "./components/Investor/InvestorPage";
 import ProfileInvestor from "./components/ProfileInvestor/ProfileInvestor";
 import ProfileInvestment from "./components/ProfileInvestment/ProfileInvestment";
 import Transaction from "./components/Transaction/Transaction";
+
 // import ArticleDetail from "./components/Article/ArticleDetail";
 import Article from "./components/Article/Article";
 import ArticleList from "./components/Article/ArticleList";
@@ -15,6 +16,7 @@ import LoginScreensInvestor from "./screens/LoginScreensInvestor";
 import RegisterScreensInvestor from "./screens/RegisterScreensInvestor";
 import LoginScreensBusiness from "./screens/LoginScreensBusiness";
 import RegisterScreensBusiness from "./screens/RegisterScreensBusiness";
+
 
 
 const App = () => {
@@ -66,6 +68,7 @@ const App = () => {
 				  path="/signupbusiness"
 				  component={RegisterScreensBusiness}
 				/>
+
 			</Switch>
 		</BrowserRouter>
 	);
