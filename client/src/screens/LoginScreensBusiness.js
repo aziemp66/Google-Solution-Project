@@ -4,9 +4,9 @@ import AuthContext from "../context/auth-context";
 
 const LoginScreensBusiness = () => {
 	const ctx = useContext(AuthContext);
-	const [message, setMessage] = useState(null);
-	const emailInputRef = useRef(null);
-	const passwordInputRef = useRef(null);
+	const [message, setMessage] = useState(false);
+	const emailInputRef = useRef("");
+	const passwordInputRef = useRef("");
 	const [getValidForm, setValidForm] = useState(true);
 
 	useEffect(() => {

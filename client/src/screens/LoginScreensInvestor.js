@@ -1,37 +1,99 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useReducer } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/auth-context";
 
+const emailReducer = (state, action) => {
+	if (action.type === "USER_INPUT") {
+		return {
+			value: action.val,
+			isValid: action.val.includes("@"),
+		};
+	} else if (action.type === "INPUT_BLUR") {
+		return { value: state.value, isValid: state.value.includes("@") };
+	}
+	return {
+		value: "",
+		isValid: false,
+	};
+};
+
+const passwordReducer = (state, action) => {
+	if (action.type === "USER_INPUT") {
+		return {
+			value: action.val,
+			isValid: action.val.length >= 6,
+		};
+	} else if (action.type === "INPUT_BLUR") {
+		return { value: state.value, isValid: state.value.length >= 6 };
+	}
+	return {
+		value: "",
+		isValid: false,
+	};
+};
+
 const LoginScreensInvestor = () => {
-	const ctx = useContext(AuthContext);
-	const emailInputRef = useRef(null);
-	const passwordInputRef = useRef(null);
-	const [message, setMessage] = useState(null);
-	const [getValidForm, setValidForm] = useState(true);
+	const [getValidForm, setValidForm] = useState(false);
+	const [emailState, dispatchEmail] = useReducer(emailReducer, {
+		value: "ngentot",
+		isValid: null,
+	});
+	const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+		value: "asu",
+		isValid: null,
+	});
 	useEffect(() => {
-		if (
-			emailInputRef.current.value.trim().length === 0 ||
-			passwordInputRef.current.value.trim().length < 6 ||
-			!(
-				emailInputRef.current.value.includes("@") &&
-				emailInputRef.current.value.includes(".")
-			)
-		) {
-			setValidForm(false);
-		} else {
-			setValidForm(true);
-		}
-	}, [emailInputRef.current.value, passwordInputRef.current.value]);
+		const identifier = setTimeout(() => {
+			console.log("Checking if form is valid");
+			setValidForm(emailState.isValid && passwordState.isValid);
+		}, 250);
+
+		return () => {
+			console.log("Cleaning up");
+			clearTimeout(identifier);
+		};
+	}, [emailState.isValid, passwordState.isValid]);
+
+	const emailChangeHandler = (event) => {
+		dispatchEmail({
+			type: "USER_INPUT",
+			val: event.target.value,
+		});
+
+		setValidForm(
+			event.target.value.includes("@") &&
+				passwordState.value.trim().length > 6
+		);
+	};
+
+	const passwordChangeHandler = (event) => {
+		dispatchPassword({
+			type: "USER_INPUT",
+			val: event.target.value,
+		});
+
+		setValidForm(
+			event.target.value.trim().length > 6 && emailState.isValid
+		);
+	};
+
+	const validateEmailHandler = () => {
+		dispatchEmail({
+			type: "INPUT_BLUR",
+		});
+	};
+
+	const validatePasswordHandler = () => {
+		dispatchPassword({
+			type: "INPUT_BLUR",
+		});
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const email = emailInputRef.current.value;
-		const password = passwordInputRef.current.value;
 		if (!getValidForm) {
-			setMessage("Please enter a valid email and password");
 			return;
 		}
-		ctx.investorLogin(email, password);
 	};
 
 	return (
@@ -75,7 +137,6 @@ const LoginScreensInvestor = () => {
 								onSubmit={handleSubmit}
 								className="space-y-6"
 							>
-								{message && <p>{message}</p>}
 								<div>
 									<label
 										htmlFor="email"
@@ -87,10 +148,12 @@ const LoginScreensInvestor = () => {
 										<input
 											id="email"
 											name="email"
-											type="text"
-											autoComplete="email"
+											type="em"
+											autoComplete="off"
 											placeholder="Email"
-											ref={emailInputRef}
+											onchange={emailChangeHandler}
+											value={emailState.value}
+											onBlur={validateEmailHandler}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
@@ -111,7 +174,9 @@ const LoginScreensInvestor = () => {
 											type="password"
 											autoComplete="off"
 											placeholder="Password"
-											ref={passwordInputRef}
+											onchange={passwordChangeHandler}
+											onBlur={validatePasswordHandler}
+											value={passwordState.value}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm poppins"
 										/>
