@@ -9,18 +9,14 @@ async function updateInvestorProfile(req, res) {
 	if (error) return res.status(400).json({ error: error.details[0].message });
 
 	//Checking if user exists
-	const investor = await Investor.findById(req.params.id);
+	const investor = await Investor.findById(req.user._id);
 	if (!investor) return res.status(400).json({ error: "Investor not found" });
-
-	//Checking if user is Authorized
-	if (investor._id.toString() !== req.user._id.toString())
-		return res.status(401).json({ error: "Unauthorized" });
 
 	//Checking null data validation
 	updateValidation.updateInvestorProfileValidation(req, investor);
 
 	try {
-		await Investor.findByIdAndUpdate(req.params.id, {
+		await Investor.findByIdAndUpdate(req.user._id, {
 			$set: {
 				name: req.body.name,
 				address: {

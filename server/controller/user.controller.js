@@ -37,7 +37,7 @@ async function getAllInvestor(req, res) {
 			}
 		}
 
-		Investor.findByIdAndUpdate(
+		await Investor.findByIdAndUpdate(
 			investor._id,
 			{
 				$set: {
@@ -48,7 +48,15 @@ async function getAllInvestor(req, res) {
 		);
 	});
 
-	res.status(200).json(investors);
+	const finalInvestors = await Investor.find(
+		{},
+		{
+			__v: 0,
+			password: 0,
+		}
+	);
+
+	res.status(200).json(finalInvestors);
 }
 
 async function getAllBusiness(req, res) {

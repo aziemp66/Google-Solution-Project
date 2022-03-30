@@ -18,10 +18,10 @@ app.use(corsMiddleware);
 
 app.use(express.json());
 
-app.use(authRoutes);
-app.use(investRoutes);
-app.use(userRoutes);
-app.use(verifyTokenMiddleware, profileRoutes);
+app.use("/api", authRoutes);
+app.use("/api", investRoutes);
+app.use("/api", userRoutes);
+app.use("/api", verifyTokenMiddleware, profileRoutes);
 
 let port = process.env.PORT || 5000;
 
