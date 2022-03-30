@@ -13,7 +13,7 @@ import InvestFailed from "./components/Transaction/InvestFailed";
 
 
 // import ArticleDetail from "./components/Article/ArticleDetail";
-import Article from "./components/Article/Article";
+import Article from "./components/Article/ArticleDetail";
 import ArticleList from "./components/Article/ArticleList";
 import authService from "./services/authService";
 import LoginScreensInvestor from "./screens/LoginScreensInvestor";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Article = ({ articles }) => {
+const Articles = ({ articles }) => {
   // const history = useHistory();
 
   return (
@@ -36,4 +36,4 @@ const Article = ({ articles }) => {
   );
 };
 
-export default Article;
+export default Articles;
