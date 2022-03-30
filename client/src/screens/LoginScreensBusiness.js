@@ -29,7 +29,7 @@ const LoginScreensBusiness = (props) => {
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-100 object-cover"
-          src="../../../assets/bg-investor.png"
+          src="../../../assets/bg-business.png"
           alt=""
         />
       </div>
@@ -39,7 +39,7 @@ const LoginScreensBusiness = (props) => {
             <Link to="/logininvestor">
               <button
                 type="submit"
-                className="bg-white hover:bg-blue-400 text-black poppins font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
               >
                 Sign In as Investor Account
               </button>
@@ -49,7 +49,7 @@ const LoginScreensBusiness = (props) => {
             <Link to="/loginbusiness">
               <button
                 type="submit"
-                className="bg-white hover:bg-blue-400 text-black poppins font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
               >
                 Sign In as Business Account
               </button>

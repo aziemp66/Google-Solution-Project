@@ -38,7 +38,7 @@ const RegisterScreensBusiness = (props) => {
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-100 object-cover"
-          src="../../../assets/bg-investor.png"
+          src="../../../assets/login-business.png"
           alt="background"
         />
       </div>
@@ -48,7 +48,7 @@ const RegisterScreensBusiness = (props) => {
             <Link to="/signupinvestor">
               <button
                 type="submit"
-                className="bg-white hover:bg-blue-400 text-black poppins font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
               >
                 Register as Investor Account
               </button>
@@ -58,7 +58,7 @@ const RegisterScreensBusiness = (props) => {
             <Link to="/signupbusiness">
               <button
                 type="submit"
-                className="bg-white hover:bg-blue-400 text-black poppins font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
               >
                 Register as Business Account
               </button>
