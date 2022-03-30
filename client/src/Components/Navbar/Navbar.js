@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import NavLink from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 // import {
 //     BrowserRouter as Router,
 //     Switch,
@@ -45,14 +45,14 @@ const Navbar = (props) => {
             <ul className="flex items-center m-5 space-x-8 text-xl font-bold">
               {data.map((item) => (
                 <li key={item.id}>
-                  <button
+                  <Link
                     className="font-bold text-black poppins"
                     activeClassName="text-gray-400 border b-4 border-blue-600 text-blue-700"
-                    onClick={() => history.push(`${item.to}`)}
+                    to={`${item.to}`}
                   >
                     {item.text}
                     <div className="flex items-center justify-center w-16 h-1 mt-2 bg-black rounded-full"></div>
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -60,18 +60,18 @@ const Navbar = (props) => {
               <Logo />
             </div>
             <div className="items-center hidden space-x-32 px-24 md:flex lg:flex">
-              <button
+              <Link
                 className="absolute flex items-center justify-center h-8 text-black border-2 border-green-600 border-solid rounded-lg w-28 poppins"
-                onClick={() => history.push("/signup")}
+                to="/signup"
               >
                 Register
-              </button>
-              <button
+              </Link>
+              <Link
                 className="absolute flex items-center justify-center h-8 text-white bg-green-700 w-28 rounded-xl poppins"
-                onClick={() => history.push("/login")}
+                to="/login"
               >
                 Login
-              </button>
+              </Link>
             </div>
           </div>
           {/* <div className="flex border-r border-black m-5 "></div> */}

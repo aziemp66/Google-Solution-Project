@@ -23,8 +23,6 @@ const RegisterScreensBusiness = (props) => {
     console.log(valueForm.email, valueForm.password);
     e.preventDefault();
     try {
-      if (valueForm.password !== valueForm.passwordConf)
-        throw Error("Passwords must match");
       await authService.signup(valueForm);
       handleSignupOrLogin();
       history.push("/");
@@ -38,14 +36,31 @@ const RegisterScreensBusiness = (props) => {
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-100 object-cover"
-          src="../../../assets/bg-investor.png"
+          src="../../../assets/login-business.png"
           alt="background"
         />
       </div>
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
-          <div className="flex justify-center">
-            <img width="200" src="../../../assets/buddyVest.png" alt="logo" />
+        <div className="p-1 mb-5">
+            <Link to="/signupinvestor">
+              <button
+                type="submit"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+              >
+                Register as Investor Account
+              </button>
+            </Link>
+          </div>
+          <div className="p-1">
+            <Link to="/signupbusiness">
+              <button
+                type="submit"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+              >
+                Register as Business Account
+              </button>
+            </Link>
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900 poppins">
             Register in Business{" "}

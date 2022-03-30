@@ -35,11 +35,21 @@ const LoginScreensInvestor = (props) => {
       </div>
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
-          <div className="flex m-20 px-36">
+          <div className="p-1 mb-5">
+            <Link to="/logininvestor">
+              <button
+                type="submit"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+              >
+                Sign In as Investor Account
+              </button>
+            </Link>
+          </div>
+          <div className="p-1">
             <Link to="/loginbusiness">
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-40 border border-transparent rounded-2xl shadow-sm text-xl text-green-800 bg-white hover:bg-[#6DFBAA] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 poppins"
+                className="bg-white hover:bg-gray-100 text-green-800 poppins font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
               >
                 Sign In as Business Account
               </button>
