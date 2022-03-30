@@ -1,98 +1,27 @@
 import React, { useContext, useState, useEffect, useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../context/auth-context";
+import authService from "../services/authService";
+import useLogin from "../hooks/useLogin";
 
-const emailReducer = (state, action) => {
-	if (action.type === "USER_INPUT") {
-		return {
-			value: action.val,
-			isValid: action.val.includes("@"),
-		};
-	} else if (action.type === "INPUT_BLUR") {
-		return { value: state.value, isValid: state.value.includes("@") };
-	}
-	return {
-		value: "",
-		isValid: false,
-	};
-};
-
-const passwordReducer = (state, action) => {
-	if (action.type === "USER_INPUT") {
-		return {
-			value: action.val,
-			isValid: action.val.length >= 6,
-		};
-	} else if (action.type === "INPUT_BLUR") {
-		return { value: state.value, isValid: state.value.length >= 6 };
-	}
-	return {
-		value: "",
-		isValid: false,
-	};
-};
-
-const LoginScreensInvestor = () => {
-	const [getValidForm, setValidForm] = useState(false);
-	const [emailState, dispatchEmail] = useReducer(emailReducer, {
-		value: "ngentot",
-		isValid: null,
+const LoginScreensInvestor = (props) => {
+	const history = useHistory();
+	const [message, updateMessage] = useState("");
+	const [loginValue, handleChange] = useLogin({
+		email: "",
+		password: "",
 	});
-	const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
-		value: "asu",
-		isValid: null,
-	});
-	useEffect(() => {
-		const identifier = setTimeout(() => {
-			console.log("Checking if form is valid");
-			setValidForm(emailState.isValid && passwordState.isValid);
-		}, 250);
 
-		return () => {
-			console.log("Cleaning up");
-			clearTimeout(identifier);
-		};
-	}, [emailState.isValid, passwordState.isValid]);
-
-	const emailChangeHandler = (event) => {
-		dispatchEmail({
-			type: "USER_INPUT",
-			val: event.target.value,
-		});
-
-		setValidForm(
-			event.target.value.includes("@") &&
-				passwordState.value.trim().length > 6
-		);
-	};
-
-	const passwordChangeHandler = (event) => {
-		dispatchPassword({
-			type: "USER_INPUT",
-			val: event.target.value,
-		});
-
-		setValidForm(
-			event.target.value.trim().length > 6 && emailState.isValid
-		);
-	};
-
-	const validateEmailHandler = () => {
-		dispatchEmail({
-			type: "INPUT_BLUR",
-		});
-	};
-
-	const validatePasswordHandler = () => {
-		dispatchPassword({
-			type: "INPUT_BLUR",
-		});
-	};
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
+		const { handleSignupOrLogin } = props;
+		console.log(loginValue.email, loginValue.password);
 		e.preventDefault();
-		if (!getValidForm) {
-			return;
+		try {
+			await authService.login(loginValue);
+			handleSignupOrLogin();
+			history.push("/");
+		} catch (err) {
+			updateMessage(err.message);
 		}
 	};
 
@@ -137,6 +66,7 @@ const LoginScreensInvestor = () => {
 								onSubmit={handleSubmit}
 								className="space-y-6"
 							>
+								{message && <p>{message}</p>}
 								<div>
 									<label
 										htmlFor="email"
@@ -151,15 +81,13 @@ const LoginScreensInvestor = () => {
 											type="em"
 											autoComplete="off"
 											placeholder="Email"
-											onchange={emailChangeHandler}
-											value={emailState.value}
-											onBlur={validateEmailHandler}
+											onchange={handleChange}
+											value={loginValue.email}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
 									</div>
 								</div>
-
 								<div className="space-y-1">
 									<label
 										htmlFor="password"
@@ -174,15 +102,13 @@ const LoginScreensInvestor = () => {
 											type="password"
 											autoComplete="off"
 											placeholder="Password"
-											onchange={passwordChangeHandler}
-											onBlur={validatePasswordHandler}
-											value={passwordState.value}
+											onchange={handleChange}
+											value={loginValue.password}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm poppins"
 										/>
 									</div>
 								</div>
-
 								<div className="flex justify-center">
 									<button
 										type="submit"
