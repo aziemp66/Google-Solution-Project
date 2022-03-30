@@ -11,6 +11,7 @@ function ListInvestor() {
 			);
 			setInvestors(response.data);
 		}
+
 		fetchInvestors();
 	}, []);
 	return (
@@ -30,9 +31,22 @@ function ListInvestor() {
 								<h3 className="font-bold text-xl 2xl:text-2xl ">
 									{investor.name}
 								</h3>
-								<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
-									{`${investor.address.city}, ${investor.address.country}`}
-								</h5>
+								{investor.address.city &&
+									investor.address.country && (
+										<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
+											{`${investor.address.city}, ${investor.address.country}`}
+										</h5>
+									)}
+							</div>
+							<div className="flex flex-row items-center gap-4 pt-2">
+								<p className="font-semibold 2xl:text-lg">
+									Investment funds donated :{" "}
+									<span className="text-[#008C41]">
+										{" "}
+										{parseInt(Math.random() * 1000)}
+									</span>{" "}
+									USD
+								</p>
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
 								<p className="font-semibold 2xl:text-lg">

@@ -5,14 +5,14 @@ function ListBusiness() {
 	const [businesses, setBusiness] = useState([]);
 	//fetch investors
 	useEffect(() => {
-		async function fetchInvestors() {
+		async function fetchBusiness() {
 			const response = await axios.get(
-				"http://34.101.237.157/api/investor"
+				"http://34.101.237.157/api/business"
 			);
 			setBusiness(response.data);
 		}
 
-		fetchInvestors();
+		fetchBusiness();
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
@@ -34,15 +34,27 @@ function ListBusiness() {
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
 								<p className="font-semibold 2xl:text-lg">
-									Business Field :
+									Investment funds received :{" "}
+									<span className="text-[#008C41]">
+										{" "}
+										{parseInt(Math.random() * 1000)}
+									</span>{" "}
+									USD
 								</p>
-								<a
-									className="font-medium text-center 2xl:text-sm border-solid rounded-2xl border-[1px] 2xl:w-[7rem] px-4 py-1 bg-[#E6EDE9]"
-									href="#"
-								>
-									{business.field}
-								</a>
 							</div>
+							{business.field && (
+								<div className="flex flex-row items-center gap-4 pt-2">
+									<p className="font-semibold 2xl:text-lg">
+										Business Field :
+									</p>
+									<a
+										className="font-medium text-center 2xl:text-sm border-solid rounded-2xl border-[1px] 2xl:w-[7rem] px-4 py-1 bg-[#E6EDE9]"
+										href="#"
+									>
+										{business.field}
+									</a>
+								</div>
+							)}
 						</div>
 					</div>
 				))}
