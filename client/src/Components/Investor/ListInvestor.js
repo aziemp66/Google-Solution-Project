@@ -6,7 +6,9 @@ function ListInvestor() {
 	//fetch investors
 	useEffect(() => {
 		async function fetchInvestors() {
-			const response = await axios.get("http://34.101.237.157/investor");
+			const response = await axios.get(
+				"http://34.101.237.157/api/investor"
+			);
 			setInvestors(response.data);
 		}
 		fetchInvestors();
