@@ -18,7 +18,10 @@ function ListInvestor() {
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
 			<div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
 				{investors.map((investor) => (
-					<div className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6">
+					<div
+						key={investor._id}
+						className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6"
+					>
 						<div className="inline-block 2xl:pl-16">
 							<img
 								src="/searchAsset/companyProfile.png"
