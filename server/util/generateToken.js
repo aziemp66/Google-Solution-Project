@@ -5,7 +5,7 @@ const generateAccessToken = (userId, accountType) => {
 		{ _id: userId, type: accountType },
 		process.env.ACCESS_TOKEN_SECRET,
 		{
-			expiresIn: "1h",
+			expiresIn: "1d",
 		}
 	);
 	return accessToken;
