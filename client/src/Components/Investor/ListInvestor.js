@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function ListInvestor() {
@@ -31,9 +32,12 @@ function ListInvestor() {
 						</div>
 						<div className="flex flex-col w-[50%] items-start gap-2">
 							<div>
-								<h3 className="font-bold text-xl 2xl:text-2xl ">
+								<Link
+									className="font-bold text-xl 2xl:text-2xl "
+									to={`profileinvestor/${investor._id}`}
+								>
 									{investor.name}
-								</h3>
+								</Link>
 								{investor.address.city &&
 									investor.address.country && (
 										<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
