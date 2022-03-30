@@ -28,7 +28,7 @@ const Navbar = (props) => {
   };
 
   const onChange = () => {
-    if (window.scrollY >= 50) {
+    if (window.scrollY >= 10) {
       setChangeHeader(true);
     } else {
       setChangeHeader(false);
@@ -39,9 +39,9 @@ const Navbar = (props) => {
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full transition duration-500 bg-white shadow-lg">
-      <nav className="flex max-w-screen-xl px-6 py-3 mx-28">
+      <nav className="flex max-w-screen px-24 py-3 mx-12">
         <Fade top>
-          <div className="container hidden space-x-3 mx-18 md:flex lg:flex">
+          <div className="container hidden space-x-12 mx-2 md:flex ">
             <ul className="flex items-center m-5 space-x-8 text-xl font-bold">
               {data.map((item) => (
                 <li key={item.id}>
@@ -56,10 +56,9 @@ const Navbar = (props) => {
                 </li>
               ))}
             </ul>
-            <div className="flex justify-center flex-grow">
+            <div className="flex justify-center w-1/2">
               <Logo />
-            </div>
-            <div className="items-center hidden space-x-32 px-24 md:flex lg:flex">
+            <div className="items-center space-x-32 px-28 md:flex lg:flex">
               <Link
                 className="absolute flex items-center justify-center h-8 text-black border-2 border-green-600 border-solid rounded-lg w-28 poppins"
                 to="/signup"
@@ -73,8 +72,21 @@ const Navbar = (props) => {
                 Login
               </Link>
             </div>
+            </div>
           </div>
-          {/* <div className="flex border-r border-black m-5 "></div> */}
+          <div className="flex border-r border-black m-5"></div>
+          <div class="my-6 w-[50%] 2xl:w-[15%] justify-between">
+            <form class="input-group relative flex flex-row items-center ">
+              <input
+                type="search"
+                class="relative flex-auto min-w-0 block w-full px-6 py-2 text-sm poppins text-gray-900 bg-white bg-clip-padding border border-solid border-green-500 rounded-2xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-[#E6EDE9] focus:outline-none"
+                placeholder="Search"
+              />
+              <div className="absolute right-6">
+                <img src="/searchAsset/searchIcon.png" alt="SearchIcon" />
+              </div>
+            </form>
+          </div>
         </Fade>
       </nav>
     </header>
