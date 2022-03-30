@@ -23,8 +23,6 @@ const RegisterScreensBusiness = (props) => {
     console.log(valueForm.email, valueForm.password);
     e.preventDefault();
     try {
-      if (valueForm.password !== valueForm.passwordConf)
-        throw Error("Passwords must match");
       await authService.signup(valueForm);
       handleSignupOrLogin();
       history.push("/");
