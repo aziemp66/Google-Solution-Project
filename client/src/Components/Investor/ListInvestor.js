@@ -1,19 +1,13 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import userInfo from "../../services/user-info-services";
 
 function ListInvestor() {
 	const [investors, setInvestors] = useState([]);
 	//fetch investors
 	useEffect(() => {
-		async function fetchInvestors() {
-			const response = await axios.get(
-				"http://34.101.237.157/api/investor"
-			);
-			setInvestors(response.data);
-		}
-
-		fetchInvestors();
+		setInvestors(userInfo.allInvestors());
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">

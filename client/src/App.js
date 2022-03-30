@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import NavBar from "./components/Navbar/Navbar";
 import Home from "./screens/HomeScreens";
@@ -15,26 +15,13 @@ import InvestFailed from "./components/Transaction/InvestFailed";
 // import ArticleDetail from "./components/Article/ArticleDetail";
 import Article from "./components/Article/ArticleDetail";
 import ArticleList from "./components/Article/ArticleList";
-import authService from "./services/authService";
+
 import LoginScreensInvestor from "./screens/LoginScreensInvestor";
 import RegisterScreensInvestor from "./screens/RegisterScreensInvestor";
 import LoginScreensBusiness from "./screens/LoginScreensBusiness";
 import RegisterScreensBusiness from "./screens/RegisterScreensBusiness";
 
 const App = () => {
-	const [user, setUser] = useState(authService.getUser());
-	const history = useHistory();
-
-	const handleLogout = () => {
-		authService.logout();
-		setUser(null);
-		history.push("/");
-	};
-
-	const handleSignupOrLogin = () => {
-		setUser(authService.getUser());
-	};
-
 	return (
 		<BrowserRouter>
 			<NavBar />

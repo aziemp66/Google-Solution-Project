@@ -1,18 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
-import axios from "axios";
+import userInfo from "../../services/user-info-services";
 
 function ListBusiness() {
 	const [businesses, setBusiness] = useState([]);
 	//fetch investors
 	useEffect(() => {
-		async function fetchBusiness() {
-			const response = await axios.get(
-				"http://34.101.237.157/api/business"
-			);
-			setBusiness(response.data);
-		}
-
-		fetchBusiness();
+		setBusiness(userInfo.allBusiness());
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
