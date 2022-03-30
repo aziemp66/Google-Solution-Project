@@ -1,5 +1,5 @@
-import SortInvestment from "./SortInvestment";
-import ListInvestment from "./ListInvestment";
+import SortBusiness from "./SortBusiness";
+import ListBusiness from "./ListBusiness";
 
 function InvestmentPage() {
     return (
@@ -8,7 +8,7 @@ function InvestmentPage() {
                 <div className="flex justify-center items-center w-full 2xl:w-full mt-40 mb-6">
                     <div className="flex flex-col align-center items-center text-center gap-3" >
                         <img src="/investorAsset/deal.png" alt="dealIcon" />
-                        <h1 className="font-bold text-black text-xl 2xl:text-3xl" >INVESTMENT</h1>
+                        <h1 className="font-bold text-black text-xl 2xl:text-3xl" >BUSINESS</h1>
                     </div>
                 </div>
                 <div className="flex flex-col w-[90%] 2xl:w-[80%] mx-auto">
@@ -18,8 +18,8 @@ function InvestmentPage() {
                     </div>
                 </div>
                 <div className="flex flex-row w-[90%] 2xl:w-[80%] mx-auto gap-4">
-                    <SortInvestment></SortInvestment>
-                    <ListInvestment></ListInvestment>
+                    <SortBusiness></SortBusiness>
+                    <ListBusiness></ListBusiness>
                 </div>
             </div>
         </section>

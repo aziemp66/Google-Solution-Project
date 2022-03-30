@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function ListInvestment() {
+function ListBusiness() {
 	const [investors, setInvestors] = useState([]);
 	const [invests, setInvests] = useState([]);
 	//fetch investors
@@ -34,13 +34,10 @@ function ListInvestment() {
 								<h3 className="font-bold text-xl 2xl:text-2xl ">
 									{invests.business.name}
 								</h3>
-								{/* <h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
-									{`${invests.address.city}, ${invests.address.country}`}
-								</h5> */}
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
 								<p className="font-semibold 2xl:text-lg">
-									Investment funds received: <span>{invests.amount}</span> USD
+									Investment funds received : <span className="text-[#008C41]"> {invests.amount}</span> USD
 								</p>
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
@@ -90,4 +87,4 @@ function ListInvestment() {
 	);
 }
 
-export default ListInvestment;
+export default ListBusiness;

@@ -19,7 +19,7 @@ const Navbar = (props) => {
   const data = [
     { id: 1, text: "Home", to: "/" },
     { id: 2, text: "Investor", to: "/investor" },
-    { id: 3, text: "Investment", to: "/investment" },
+    { id: 3, text: "Business", to: "/business" },
     { id: 4, text: "Article", to: "/articlelist" },
   ];
 

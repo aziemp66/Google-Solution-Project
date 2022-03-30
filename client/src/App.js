@@ -4,7 +4,7 @@ import NavBar from "./components/Navbar/Navbar";
 import Home from "./screens/HomeScreens";
 import Search from "./components/Search/SearchPage";
 import InvestorPage from "./components/Investor/InvestorPage";
-import InvestmentPage from "./components/Investment/InvestmentPage";
+import BusinessPage from "./components/Business/BusinessPage";
 import ProfileInvestor from "./components/ProfileInvestor/ProfileInvestor";
 import ProfileInvestment from "./components/ProfileInvestment/ProfileInvestment";
 import Transaction from "./components/Transaction/Transaction";
@@ -55,7 +55,7 @@ const App = () => {
 					component={ProfileInvestment}
 				/>
 				<Route exact path="/investor" component={InvestorPage} />
-				<Route exact path="/investment" component={InvestmentPage} />
+				<Route exact path="/business" component={BusinessPage} />
 				<Route exact path="/transaction" component={Transaction} />
 				<Route exact path="/investsuccess" component={InvestSuccess} />
 				<Route exact path="/investfailed" component={InvestFailed} />
