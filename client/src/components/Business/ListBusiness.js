@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function ListInvestor() {
+function ListBusiness() {
 	const [investors, setInvestors] = useState([]);
+	const [invests, setInvests] = useState([]);
 	//fetch investors
 	useEffect(() => {
 		async function fetchInvestors() {
 			const response = await axios.get("http://34.101.237.157/investor");
 			setInvestors(response.data);
 		}
+		async function fetchInvests() {
+			const response = await axios.get("http://34.101.237.157/invest");
+			setInvests(response.data);
+		}
 		fetchInvestors();
+		fetchInvests();
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
 			<div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
-				{investors.map((investor) => (
+				{invests.map((invests) => (
 					<div className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6">
 						<div className="inline-block 2xl:pl-16">
 							<img
@@ -26,21 +32,23 @@ function ListInvestor() {
 						<div className="flex flex-col w-[50%] items-start gap-2">
 							<div>
 								<h3 className="font-bold text-xl 2xl:text-2xl ">
-									{investor.name}
+									{invests.business.name}
 								</h3>
-								<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
-									{`${investor.address.city}, ${investor.address.country}`}
-								</h5>
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
 								<p className="font-semibold 2xl:text-lg">
-									Investing mostly in:
+									Investment funds received : <span className="text-[#008C41]"> {invests.amount}</span> USD
+								</p>
+							</div>
+							<div className="flex flex-row items-center gap-4 pt-2">
+								<p className="font-semibold 2xl:text-lg">
+									Business Field :
 								</p>
 								<a
 									className="font-medium text-center 2xl:text-sm border-solid rounded-2xl border-[1px] 2xl:w-[7rem] px-4 py-1 bg-[#E6EDE9]"
 									href="#"
 								>
-									{investor.mostInvestedField}
+									{invests.field}
 								</a>
 							</div>
 						</div>
@@ -79,4 +87,4 @@ function ListInvestor() {
 	);
 }
 
-export default ListInvestor;
+export default ListBusiness;

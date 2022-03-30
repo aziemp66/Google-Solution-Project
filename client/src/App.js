@@ -4,9 +4,13 @@ import NavBar from "./components/Navbar/Navbar";
 import Home from "./screens/HomeScreens";
 import Search from "./components/Search/SearchPage";
 import InvestorPage from "./components/Investor/InvestorPage";
+import BusinessPage from "./components/Business/BusinessPage";
 import ProfileInvestor from "./components/ProfileInvestor/ProfileInvestor";
 import ProfileInvestment from "./components/ProfileInvestment/ProfileInvestment";
 import Transaction from "./components/Transaction/Transaction";
+import InvestSuccess from "./components/Transaction/InvestSuccess";
+import InvestFailed from "./components/Transaction/InvestFailed";
+
 
 // import ArticleDetail from "./components/Article/ArticleDetail";
 import Article from "./components/Article/Article";
@@ -51,7 +55,11 @@ const App = () => {
 					component={ProfileInvestment}
 				/>
 				<Route exact path="/investor" component={InvestorPage} />
+				<Route exact path="/business" component={BusinessPage} />
 				<Route exact path="/transaction" component={Transaction} />
+				<Route exact path="/investsuccess" component={InvestSuccess} />
+				<Route exact path="/investfailed" component={InvestFailed} />
+				<Route exact path="/logininvestor" component={LoginScreensInvestor} />
 				<Route exact path="article/:name" component={Article} />
 				<Route exact path="/articlelist" component={ArticleList} />
 				<Route exact path="/login" component={LoginScreensInvestor} />
