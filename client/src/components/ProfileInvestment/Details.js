@@ -1,33 +1,81 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 function Details() {
-    return (
-        <div className="flex flex-col items-start w-[30%]">
-            <div className="inline-block w-full px-4 py-2 bg-[#008C41]">
-                <h2 className="font-semibold text-lg 2xl:text-2xl text-white">BUSINESS DETAILS</h2>
-            </div>
-            <div className="flex relative flex-col gap-4 w-full">
-                <div>
-                    <img className="w-full" src="/assets/company.png" alt="company" srcset="" />
-                </div>
-                <div className="flex absolute bottom-[-3rem] 2xl:bottom-[-3rem] right-0 left-0 items-center justify-center">
-                    <img src="/assets/companyProfile.png" alt="companyProfile" srcset="" />
-                </div>
-            </div>
-            <div className="flex flex-col justify-center gap-8 px-16 pt-16 pb-8 bg-white ">
-                <div className="text-center">
-                    <h3 className="font-semibold text-lg 2xl:text-xl">TODAY COMPANY</h3>
-                    <p className="font-normal text-lg 2xl:text-lg text-gray-500">Wina, Austria</p>
-                </div>
-                <div className="flex flex-col text-left">
-                    <p className="font-normal text-sm 2xl:text-base">Jl. Srijaya Negara, No. 123, Wina, Austria.</p>
-                    <p className="font-normal text-sm 2xl:text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <p className="font-normal text-sm 2xl:text-base">Postal Code <span>12345</span></p>
-                </div>
-                <div className="mx-auto">
-                    <button type="button" className="border-[1px] border-solid rounded-full px-8 py-2 bg-[#008C41] text-white font-semibold">Give Funds</button>
-                </div>
-            </div>
-        </div>
-    );
+	const { id } = useParams();
+	const [name, setName] = useState("");
+	const [country, setCountry] = useState("");
+	const [city, setCity] = useState("");
+	const [street, setStreet] = useState("");
+	const [bio, setBio] = useState("");
+	const [postalCode, setPostalCode] = useState("");
+	useEffect(() => {
+		axios.get(`http://34.101.237.157/api/business/${id}`).then((res) => {
+			const { data } = res;
+			setName(data.name);
+			setCountry(data.address.country);
+			setCity(data.address.city);
+			setStreet(data.address.street);
+			setBio(data.bio);
+			setPostalCode(data.address.postalCode);
+		});
+	}, [id]);
+	return (
+		<div className="flex flex-col items-start w-[30%]">
+			<div className="inline-block w-full px-4 py-2 bg-[#008C41]">
+				<h2 className="font-semibold text-lg 2xl:text-2xl text-white">
+					BUSINESS DETAILS
+				</h2>
+			</div>
+			<div className="flex relative flex-col gap-4 w-full">
+				<div>
+					<img
+						className="w-full"
+						src="/assets/company.png"
+						alt="company"
+						srcset=""
+					/>
+				</div>
+				<div className="flex absolute bottom-[-3rem] 2xl:bottom-[-3rem] right-0 left-0 items-center justify-center">
+					<img
+						src="/assets/companyProfile.png"
+						alt="companyProfile"
+						srcset=""
+					/>
+				</div>
+			</div>
+			<div className="flex flex-col justify-center gap-8 px-16 pt-16 pb-8 bg-white ">
+				<div className="text-center">
+					<h3 className="font-semibold text-lg 2xl:text-xl">
+						{name}
+					</h3>
+					<p className="font-normal text-lg 2xl:text-lg text-gray-500">
+						{`${city}, ${country}`}
+					</p>
+				</div>
+				<div className="flex flex-col text-left">
+					<p className="font-normal text-sm 2xl:text-base">
+						{street}
+					</p>
+					<p className="font-normal text-sm 2xl:text-base">
+						{bio.substring(0, 50)}
+					</p>
+					<p className="font-normal text-sm 2xl:text-base">
+						Postal Code <span>{postalCode}</span>
+					</p>
+				</div>
+				<div className="mx-auto">
+					<button
+						type="button"
+						className="border-[1px] border-solid rounded-full px-8 py-2 bg-[#008C41] text-white font-semibold"
+					>
+						Give Funds
+					</button>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Details;
