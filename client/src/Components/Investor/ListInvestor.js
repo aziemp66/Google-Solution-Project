@@ -1,19 +1,26 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import userInfo from "../../services/user-info-services";
+import axios from "axios";
 
 function ListInvestor() {
 	const [investors, setInvestors] = useState([]);
 	//fetch investors
 	useEffect(() => {
-		setInvestors(userInfo.allInvestors());
+		async function fetchInvestors() {
+			const response = await axios.get(
+				"http://34.101.237.157/api/investor"
+			);
+			setInvestors(response.data);
+		}
+
+		fetchInvestors();
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
 			<div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
 				{investors.map((investor) => (
-					<div
+					<Link
+						to={`profileInvestor/${investor._id}`}
 						key={investor._id}
 						className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6"
 					>
@@ -26,12 +33,9 @@ function ListInvestor() {
 						</div>
 						<div className="flex flex-col w-[50%] items-start gap-2">
 							<div>
-								<Link
-									className="font-bold text-xl 2xl:text-2xl "
-									to={`profileinvestor/${investor._id}`}
-								>
+								<p className="font-bold text-xl 2xl:text-2xl ">
 									{investor.name}
-								</Link>
+								</p>
 								{investor.address.city &&
 									investor.address.country && (
 										<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
@@ -61,7 +65,7 @@ function ListInvestor() {
 								</a>
 							</div>
 						</div>
-					</div>
+					</Link>
 				))}
 			</div>
 			<div className="flex w-full pb-8">

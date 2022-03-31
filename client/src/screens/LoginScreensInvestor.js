@@ -1,37 +1,28 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect, useReducer } from "react";
+import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../context/auth-context";
+import authService from "../services/authService";
+import useLogin from "../hooks/useLogin";
 
-const LoginScreensInvestor = () => {
-	const ctx = useContext(AuthContext);
-	const emailInputRef = useRef(null);
-	const passwordInputRef = useRef(null);
-	const [message, setMessage] = useState(null);
-	const [getValidForm, setValidForm] = useState(true);
-	useEffect(() => {
-		if (
-			emailInputRef.current.value.trim().length === 0 ||
-			passwordInputRef.current.value.trim().length < 6 ||
-			!(
-				emailInputRef.current.value.includes("@") &&
-				emailInputRef.current.value.includes(".")
-			)
-		) {
-			setValidForm(false);
-		} else {
-			setValidForm(true);
-		}
-	}, [emailInputRef.current.value, passwordInputRef.current.value]);
+const LoginScreensInvestor = (props) => {
+	const history = useHistory();
+	const [message, updateMessage] = useState("");
+	const [loginValue, handleChange] = useLogin({
+		email: "",
+		password: "",
+	});
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
+		const { handleSignupOrLogin } = props;
+		console.log(loginValue.email, loginValue.password);
 		e.preventDefault();
-		const email = emailInputRef.current.value;
-		const password = passwordInputRef.current.value;
-		if (!getValidForm) {
-			setMessage("Please enter a valid email and password");
-			return;
+		try {
+			await authService.login(loginValue);
+			handleSignupOrLogin();
+			history.push("/");
+		} catch (err) {
+			updateMessage(err.message);
 		}
-		ctx.investorLogin(email, password);
 	};
 
 	return (
@@ -87,16 +78,16 @@ const LoginScreensInvestor = () => {
 										<input
 											id="email"
 											name="email"
-											type="text"
-											autoComplete="email"
+											type="em"
+											autoComplete="off"
 											placeholder="Email"
-											ref={emailInputRef}
+											onchange={handleChange}
+											value={loginValue.email}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
 									</div>
 								</div>
-
 								<div className="space-y-1">
 									<label
 										htmlFor="password"
@@ -111,13 +102,13 @@ const LoginScreensInvestor = () => {
 											type="password"
 											autoComplete="off"
 											placeholder="Password"
-											ref={passwordInputRef}
+											onchange={handleChange}
+											value={loginValue.password}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm poppins"
 										/>
 									</div>
 								</div>
-
 								<div className="flex justify-center">
 									<button
 										type="submit"

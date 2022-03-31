@@ -166,6 +166,7 @@ export const AuthContextProvider = (props) => {
 				businessRegister: onRegisterBusiness,
 				logout: onLogout,
 				invest: postInvest,
+				message: undefined,
 			}}
 		>
 			{props.children}

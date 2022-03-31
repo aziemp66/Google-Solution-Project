@@ -1,18 +1,26 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from "react";
-import userInfo from "../../services/user-info-services";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ListBusiness() {
 	const [businesses, setBusiness] = useState([]);
 	//fetch investors
 	useEffect(() => {
-		setBusiness(userInfo.allBusiness());
+		async function fetchBusiness() {
+			const response = await axios.get(
+				"http://34.101.237.157/api/business"
+			);
+			setBusiness(response.data);
+		}
+
+		fetchBusiness();
 	}, []);
 	return (
 		<div className="flex flex-col w-full 2xl:w-full gap-8 2xl:gap-8 pt-4 2xl:pt-4 mb-12 2xl:mb-0 mx-auto bg-white">
 			<div className="Investor-list flex flex-col gap-4 2xl:gap-12 text-gray-900">
 				{businesses.map((business) => (
-					<div
+					<Link
+						to={`profileInvestment/${business._id}`}
 						key={business._id}
 						className="flex flex-row items-center 2xl:gap-6 border-b-2 pb-6"
 					>
@@ -53,7 +61,7 @@ function ListBusiness() {
 								</div>
 							)}
 						</div>
-					</div>
+					</Link>
 				))}
 			</div>
 			<div className="flex w-full pb-8">
