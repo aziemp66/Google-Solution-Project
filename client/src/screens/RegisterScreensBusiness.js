@@ -1,48 +1,33 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import authService from "../services/authService";
+import useForm from "../hooks/useLogin";
 
-import AuthContext from "../context/auth-context";
-
-const RegisterScreensBusiness = () => {
-	const ctx = useContext(AuthContext);
-	const nameInputRef = useRef();
-	const emailInputRef = useRef();
-	const passwordInputRef = useRef();
+const RegisterScreensBusiness = (props) => {
 	const [getValidForm, setValidForm] = useState(true);
-	const [message, setMessage] = useState();
+	const [message, updateMessage] = useState("");
+	const history = useHistory();
+	const form = useRef();
+	const [valueForm, handleChange] = useForm({
+		email: "",
+		password: "",
+	});
 
 	useEffect(() => {
-		if (
-			nameInputRef.current.value.trim().length === 0 ||
-			emailInputRef.current.value.trim().length === 0 ||
-			passwordInputRef.current.value.trim().length < 6 ||
-			!(
-				emailInputRef.current.value.includes("@") &&
-				emailInputRef.current.value.includes(".")
-			)
-		) {
-			setValidForm(false);
-		} else {
-			setValidForm(true);
-		}
-	}, [
-		nameInputRef.current.value,
-		emailInputRef.current.value,
-		passwordInputRef.current.value,
-	]);
+		form.current.checkValidity() ? setValidForm(false) : setValidForm(true);
+		updateMessage("");
+	}, [valueForm]);
 
 	const handleSubmit = async (e) => {
-		if (getValidForm) {
-			e.preventDefault();
-
-			const name = nameInputRef.current.value;
-			const email = emailInputRef.current.value;
-			const password = passwordInputRef.current.value;
-
-			ctx.businessRegister(name, email, password);
-		} else {
-			setMessage("Please enter a valid email and password");
+		const { handleSignupOrLogin } = props;
+		console.log(valueForm.email, valueForm.password);
+		e.preventDefault();
+		try {
+			await authService.signup(valueForm);
+			handleSignupOrLogin();
+			history.push("/");
+		} catch (err) {
+			updateMessage(err.message);
 		}
 	};
 
@@ -83,6 +68,7 @@ const RegisterScreensBusiness = () => {
 					<div className="mt-8">
 						<div className="mt-6">
 							<form
+								ref={form}
 								autoComplete="off"
 								onSubmit={handleSubmit}
 								className="space-y-6"
@@ -102,7 +88,8 @@ const RegisterScreensBusiness = () => {
 											type="name"
 											autoComplete="on"
 											placeholder="Name"
-											ref={nameInputRef}
+											onChange={handleChange}
+											value={valueForm.name}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
@@ -111,7 +98,7 @@ const RegisterScreensBusiness = () => {
 
 								<div className="space-y-1">
 									<label
-										htmlFor="email"
+										htmlFor="password"
 										className="block text-sm font-medium text-gray-700 poppins"
 									>
 										Email
@@ -123,7 +110,8 @@ const RegisterScreensBusiness = () => {
 											type="email"
 											autoComplete="off"
 											placeholder="Email"
-											ref={emailInputRef}
+											onChange={handleChange}
+											value={valueForm.email}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
@@ -144,7 +132,8 @@ const RegisterScreensBusiness = () => {
 											type="password"
 											autoComplete="off"
 											placeholder="Password"
-											ref={passwordInputRef}
+											onChange={handleChange}
+											value={valueForm.password}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>

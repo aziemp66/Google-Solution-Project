@@ -31,17 +31,11 @@ function About() {
 							<h3 className="font-bold text-lg 2xl:text-xl">
 								ABOUT US
 							</h3>
-							<button
-								type="button"
-								className="font-semibold border-b-[2px] rounded-sm border-[#008C41] text-[#008C41] text-lg 2xl:text-lg "
-							>
-								Edit Profile
-							</button>
 						</div>
 						<div className="flex flex-col pl-6 w-[80%] gap-8">
 							<div>
 								<p className="font-normal text-sm 2xl:text-base">
-									{bio}
+									{bio ? bio : "No bio"}
 								</p>
 							</div>
 							<div className="flex flex-row items-center gap-4">
@@ -78,7 +72,7 @@ function About() {
 										type="button"
 										className="mx-auto font-medium text-center 2xl:text-base border-solid rounded-2xl border-[1px] w-[8rem] 2xl:w-[8rem] px-4 py-1 bg-[#E6EDE9]"
 									>
-										{field}
+										{field ? field : "No field"}
 									</button>
 								</div>
 							</div>
@@ -115,7 +109,7 @@ function About() {
 										href="#"
 										className="font-medium text-base 2xl:text-lg text-[#008C41]"
 									>
-										{website}
+										{website ? website : "No website"}
 									</a>
 								</div>
 							</div>

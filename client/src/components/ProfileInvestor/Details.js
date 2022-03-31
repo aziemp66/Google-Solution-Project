@@ -51,18 +51,19 @@ function Details() {
 						{name}
 					</h3>
 					<p className="font-normal text-lg 2xl:text-lg text-gray-500">
-						{`${city}, ${country}`}
+						{`${city ? city : "N/A"}, ${country ? country : "N/A"}`}
 					</p>
 				</div>
 				<div className="flex flex-col text-left">
 					<p className="font-normal text-sm 2xl:text-base">
-						{street}
+						{street ? street : "N/A"}
 					</p>
 					<p className="font-normal text-sm 2xl:text-base">
-						{bio.substring(0, 50)}
+						{bio ? bio.substring(0, 50) : "N/A"}
 					</p>
 					<p className="font-normal text-sm 2xl:text-base">
-						Postal Code <span>{postalCode}</span>
+						Postal Code{" "}
+						<span>{postalCode ? postalCode : "N/A"}</span>
 					</p>
 				</div>
 			</div>
