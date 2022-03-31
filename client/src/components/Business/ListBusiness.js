@@ -33,9 +33,15 @@ function ListBusiness() {
 						</div>
 						<div className="flex flex-col w-[50%] items-start gap-2">
 							<div>
-								<h3 className="font-bold text-xl 2xl:text-2xl ">
+								<p className="font-bold text-xl 2xl:text-2xl ">
 									{business.name}
-								</h3>
+								</p>
+								{business.address.city &&
+									business.address.country && (
+										<h5 className="font-normal text-lg 2xl:text-xl text-[#585858]">
+											{`${business.address.city}, ${business.address.country}`}
+										</h5>
+									)}
 							</div>
 							<div className="flex flex-row items-center gap-4 pt-2">
 								<p className="font-semibold 2xl:text-lg">
@@ -56,7 +62,9 @@ function ListBusiness() {
 										className="font-medium text-center 2xl:text-sm border-solid rounded-2xl border-[1px] 2xl:w-[7rem] px-4 py-1 bg-[#E6EDE9]"
 										href="#"
 									>
-										{business.field}
+										{business.field
+											? business.field
+											: "N/A"}
 									</a>
 								</div>
 							)}

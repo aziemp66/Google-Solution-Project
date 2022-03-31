@@ -1,38 +1,27 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import AuthContext from "../context/auth-context";
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import authService from "../services/authService";
+import useLogin from "../hooks/useLogin";
 
-const LoginScreensBusiness = () => {
-	const ctx = useContext(AuthContext);
-	const [message, setMessage] = useState(false);
-	const emailInputRef = useRef("");
-	const passwordInputRef = useRef("");
-	const [getValidForm, setValidForm] = useState(true);
+const LoginScreensBusiness = (props) => {
+	const history = useHistory();
+	const [message, updateMessage] = useState("");
+	const [loginValue, handleChange] = useLogin({
+		email: "",
+		password: "",
+	});
 
-	useEffect(() => {
-		if (
-			emailInputRef.current.value.trim().length === 0 ||
-			passwordInputRef.current.value.trim().length === 0 ||
-			!(
-				emailInputRef.current.value.includes("@") &&
-				emailInputRef.current.value.includes(".")
-			)
-		) {
-			setValidForm(false);
-		} else {
-			setValidForm(true);
-		}
-	}, [emailInputRef.current.value, passwordInputRef.current.value]);
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
+		const { handleSignupOrLogin } = props;
+		console.log(loginValue.email, loginValue.password);
 		e.preventDefault();
-		const email = emailInputRef.current.value;
-		const password = passwordInputRef.current.value;
-		if (!getValidForm) {
-			setMessage("Please enter a valid email and password");
-			return;
+		try {
+			await authService.login(loginValue);
+			handleSignupOrLogin();
+			history.push("/");
+		} catch (err) {
+			updateMessage(err.message);
 		}
-		ctx.businessLogin(email, password);
 	};
 
 	return (
@@ -91,7 +80,8 @@ const LoginScreensBusiness = () => {
 											type="text"
 											autoComplete="email"
 											placeholder="Email"
-											ref={emailInputRef}
+											onChange={handleChange}
+											value={loginValue.email}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
@@ -112,7 +102,8 @@ const LoginScreensBusiness = () => {
 											type="password"
 											autoComplete="off"
 											placeholder="Password"
-											ref={passwordInputRef}
+											onChange={handleChange}
+											value={loginValue.password}
 											required
 											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-2xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm poppins"
 										/>

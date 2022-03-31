@@ -1,25 +1,25 @@
 import tokenService from "./tokenService";
+import axios from "axios";
 
-const BASE_URL = "/api/auth/";
+const BASE_URL = "http://34.101.237.157/api";
 
-const signup = (user) => {
-	return fetch(BASE_URL + "signup", {
-		method: "POST",
-		headers: new Headers({ "Content-Type": "application/json" }),
-		body: JSON.stringify(user),
-	})
+const signup = (type, name, email, password) => {
+	axios
+		.post(`${BASE_URL}/${type}/register`, {
+			name,
+			email,
+			password,
+		})
 		.then((res) => {
-			console.log(res, "<-- response object");
-			return res.json();
-		})
-		.then((json) => {
-			if (json.token) return json;
-			console.log(json, "<-- error object");
-			throw new Error(`${json.err}`);
-		})
-		.then(({ token }) => {
-			tokenService.setToken(token);
+			if (res.data.error) {
+				console.log(res.data.error);
+				return;
+			}
 		});
+
+	/* .then(({ token }) => {
+			tokenService.setToken(token);
+		}); */
 };
 
 const getUser = () => {
@@ -30,17 +30,20 @@ const logout = () => {
 	tokenService.removeToken();
 };
 
-const login = (create) => {
-	return fetch(BASE_URL + "login", {
-		method: "POST",
-		headers: new Headers({ "Content-Type": "application/json" }),
-		body: JSON.stringify(create),
-	})
-		.then((res) => {
-			if (res.ok) return res.json();
-			throw new Error("Bad Credentials!");
+const login = (type, email, password) => {
+	axios
+		.post(`${BASE_URL}/${type}/login`, {
+			email,
+			password,
 		})
-		.then(({ token }) => tokenService.setToken(token));
+		.then((res) => {
+			if (res.data.error) {
+				console.log(res.data.error);
+				return;
+			}
+			const { accessToken: token } = res.data;
+			tokenService.setToken(token);
+		});
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
