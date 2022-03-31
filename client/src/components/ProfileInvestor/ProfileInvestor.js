@@ -1,10 +1,7 @@
 import Details from "./Details";
 import About from "./About";
-import { useParams } from "react-router-dom";
 
 function ProfileInvestor(props) {
-	const { id } = useParams();
-	console.log(id);
 	return (
 		<section className="flex flex-col gap-12 pb-12 2xl:pb-12 px-40 2xl:px-40 w-full 2xl:w-full h-[100vh] 2xl:h-[100vh] align-middle bg-[#E6EDE9]">
 			<div className="flex flex-col w-full 2xl:w-full gap-4">
